@@ -315,86 +315,116 @@ export const HomeScreen = ({ navigation }: Props) => {
           </View>
 
           <View
-            className="bg-gradient-to-br from-chinared to-red-700 rounded-2xl p-8 shadow-xl"
             style={
               isDesktop
-                ? { maxWidth: 800, marginHorizontal: "auto" }
+                ? { maxWidth: 900, marginHorizontal: "auto" }
                 : { marginHorizontal: 0 }
             }
           >
             <LinearGradient
               colors={["#D00000", "#A00000"]}
               style={{
-                borderRadius: 16,
-                padding: isDesktop ? 32 : 24,
+                borderRadius: 20,
+                padding: isDesktop ? 40 : 24,
               }}
             >
-              <View className="items-center mb-6">
-                <View className="bg-white/20 rounded-full p-4 mb-4">
-                  <Ionicons name="calendar-outline" size={isDesktop ? 48 : 40} color="white" />
+              {/* Header com Badge */}
+              <View className="items-center mb-8">
+                <View className="bg-yellowaccent rounded-full px-5 py-2 mb-4">
+                  <Text className="text-navy text-sm font-bold uppercase tracking-wider">
+                    Bônus Exclusivo
+                  </Text>
+                </View>
+                <View className="bg-white/20 rounded-full p-5 mb-4">
+                  <Ionicons name="calendar-outline" size={isDesktop ? 56 : 48} color="white" />
                 </View>
                 <Text
-                  className="text-white font-bold text-center mb-2"
-                  style={{ fontSize: isDesktop ? 28 : 22 }}
+                  className="text-white font-bold text-center mb-3"
+                  style={{ fontSize: isDesktop ? 32 : 26 }}
                 >
                   3 Meses de Acompanhamento
                 </Text>
                 <Text
-                  className="text-white/90 text-center leading-6"
-                  style={{ fontSize: isDesktop ? 18 : 16 }}
+                  className="text-yellowaccent text-center font-semibold"
+                  style={{ fontSize: isDesktop ? 20 : 18 }}
                 >
-                  Encontros 1 a 1 quinzenais
+                  Encontros 1 a 1 Quinzenais
                 </Text>
               </View>
 
-              <View className="bg-white/10 rounded-xl p-6 mb-6">
-                <View className="flex-row items-start mb-4">
-                  <View className="bg-yellowaccent rounded-full p-2 mr-4">
-                    <Ionicons name="checkmark-circle" size={24} color="#0F1B2A" />
+              {/* Cards Grid */}
+              <View
+                style={
+                  isDesktop
+                    ? { flexDirection: "row", gap: 16, marginBottom: 24 }
+                    : { marginBottom: 24 }
+                }
+              >
+                {/* Card 1 */}
+                <View
+                  className="bg-white/10 rounded-2xl p-5 backdrop-blur"
+                  style={
+                    isDesktop
+                      ? { flex: 1 }
+                      : { marginBottom: 16 }
+                  }
+                >
+                  <View className="bg-yellowaccent rounded-full p-3 mb-3 self-start">
+                    <Ionicons name="analytics" size={28} color="#0F1B2A" />
                   </View>
-                  <View className="flex-1">
-                    <Text className="text-white font-bold text-base mb-1">
-                      Análise dos Dados Coletados
-                    </Text>
-                    <Text className="text-white/80 text-sm leading-5">
-                      Revise e organize todas as informações de fornecedores, produtos e contatos obtidos na China
-                    </Text>
-                  </View>
+                  <Text className="text-white font-bold text-lg mb-2">
+                    Análise dos Dados
+                  </Text>
+                  <Text className="text-white/80 text-sm leading-6">
+                    Revise e organize informações de fornecedores e produtos
+                  </Text>
                 </View>
 
-                <View className="flex-row items-start mb-4">
-                  <View className="bg-yellowaccent rounded-full p-2 mr-4">
-                    <Ionicons name="checkmark-circle" size={24} color="#0F1B2A" />
+                {/* Card 2 */}
+                <View
+                  className="bg-white/10 rounded-2xl p-5 backdrop-blur"
+                  style={
+                    isDesktop
+                      ? { flex: 1 }
+                      : { marginBottom: 16 }
+                  }
+                >
+                  <View className="bg-yellowaccent rounded-full p-3 mb-3 self-start">
+                    <Ionicons name="bulb" size={28} color="#0F1B2A" />
                   </View>
-                  <View className="flex-1">
-                    <Text className="text-white font-bold text-base mb-1">
-                      Estratégia de Implementação
-                    </Text>
-                    <Text className="text-white/80 text-sm leading-5">
-                      Planeje seus próximos passos com orientação especializada para transformar conhecimento em resultados
-                    </Text>
-                  </View>
+                  <Text className="text-white font-bold text-lg mb-2">
+                    Estratégia de Implementação
+                  </Text>
+                  <Text className="text-white/80 text-sm leading-6">
+                    Planeje seus próximos passos com orientação especializada
+                  </Text>
                 </View>
 
-                <View className="flex-row items-start">
-                  <View className="bg-yellowaccent rounded-full p-2 mr-4">
-                    <Ionicons name="checkmark-circle" size={24} color="#0F1B2A" />
+                {/* Card 3 */}
+                <View
+                  className="bg-white/10 rounded-2xl p-5 backdrop-blur"
+                  style={isDesktop ? { flex: 1 } : {}}
+                >
+                  <View className="bg-yellowaccent rounded-full p-3 mb-3 self-start">
+                    <Ionicons name="headset" size={28} color="#0F1B2A" />
                   </View>
-                  <View className="flex-1">
-                    <Text className="text-white font-bold text-base mb-1">
-                      Suporte Personalizado
-                    </Text>
-                    <Text className="text-white/80 text-sm leading-5">
-                      Tire dúvidas, resolva desafios e receba feedback direto durante sua jornada de implementação
-                    </Text>
-                  </View>
+                  <Text className="text-white font-bold text-lg mb-2">
+                    Suporte Personalizado
+                  </Text>
+                  <Text className="text-white/80 text-sm leading-6">
+                    Tire dúvidas e receba feedback durante sua jornada
+                  </Text>
                 </View>
               </View>
 
-              <View className="bg-yellowaccent rounded-xl p-4">
-                <Text className="text-navy font-bold text-center text-base">
-                  Já Incluso no Pacote! Sem Custo Adicional
-                </Text>
+              {/* Badge Final */}
+              <View className="bg-white rounded-2xl p-4">
+                <View className="flex-row items-center justify-center">
+                  <Ionicons name="gift" size={24} color="#1A8F5A" />
+                  <Text className="text-navy font-bold text-center text-base ml-2">
+                    Já Incluso no Pacote! Sem Custo Adicional
+                  </Text>
+                </View>
               </View>
             </LinearGradient>
           </View>
