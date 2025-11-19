@@ -297,139 +297,151 @@ export const HomeScreen = ({ navigation }: Props) => {
       </ImageBackground>
 
       {/* MENTORSHIP SECTION */}
-      <View className={isDesktop ? "py-16 bg-white" : "px-4 py-10 bg-white"}>
-        <DesktopContainer>
-          <View className="items-center mb-8">
-            <View className="bg-chinared rounded-full p-3 mb-3">
-              <Ionicons name="people" size={32} color="white" />
-            </View>
-            <Text
-              className="text-navy font-bold text-center mb-2"
-              style={{ fontSize: isDesktop ? 36 : 24 }}
-            >
-              Mentoria na Volta
-            </Text>
-            <Text className="text-gray-600 text-base text-center max-w-2xl px-4">
-              Seu sucesso não termina quando você volta para casa
-            </Text>
-          </View>
-
-          <View
-            style={
-              isDesktop
-                ? { maxWidth: 900, marginHorizontal: "auto" }
-                : { marginHorizontal: 0 }
-            }
-          >
-            <LinearGradient
-              colors={["#D00000", "#A00000"]}
-              style={{
-                borderRadius: 20,
-                padding: isDesktop ? 40 : 24,
-              }}
-            >
-              {/* Header com Badge */}
-              <View className="items-center mb-8">
-                <View className="bg-yellowaccent rounded-full px-5 py-2 mb-4">
-                  <Text className="text-navy text-sm font-bold uppercase tracking-wider">
-                    Bônus Exclusivo
-                  </Text>
-                </View>
-                <View className="bg-white/20 rounded-full p-5 mb-4">
-                  <Ionicons name="calendar-outline" size={isDesktop ? 56 : 48} color="white" />
-                </View>
-                <Text
-                  className="text-white font-bold text-center mb-3"
-                  style={{ fontSize: isDesktop ? 32 : 26 }}
-                >
-                  3 Meses de Acompanhamento
-                </Text>
-                <Text
-                  className="text-yellowaccent text-center font-semibold"
-                  style={{ fontSize: isDesktop ? 20 : 18 }}
-                >
-                  Encontros 1 a 1 Quinzenais
-                </Text>
+      <ImageBackground
+        source={require("../../assets/background-1763595493982.png")}
+        resizeMode="cover"
+        style={{ width: "100%" }}
+      >
+        <LinearGradient
+          colors={["rgba(255, 255, 255, 0.92)", "rgba(248, 250, 252, 0.88)", "rgba(255, 255, 255, 0.92)"]}
+          style={{
+            paddingVertical: isDesktop ? 64 : 40,
+            paddingHorizontal: isDesktop ? 0 : 16,
+          }}
+        >
+          <DesktopContainer>
+            <View className="items-center mb-8">
+              <View className="bg-chinared rounded-full p-3 mb-3">
+                <Ionicons name="people" size={32} color="white" />
               </View>
-
-              {/* Cards Grid */}
-              <View
-                style={
-                  isDesktop
-                    ? { flexDirection: "row", gap: 16, marginBottom: 24 }
-                    : { marginBottom: 24 }
-                }
+              <Text
+                className="text-navy font-bold text-center mb-2"
+                style={{ fontSize: isDesktop ? 36 : 24 }}
               >
-                {/* Card 1 */}
+                Mentoria na Volta
+              </Text>
+              <Text className="text-gray-600 text-base text-center max-w-2xl px-4">
+                Seu sucesso não termina quando você volta para casa
+              </Text>
+            </View>
+
+            <View
+              style={
+                isDesktop
+                  ? { maxWidth: 900, marginHorizontal: "auto" }
+                  : { marginHorizontal: 0 }
+              }
+            >
+              <LinearGradient
+                colors={["#D00000", "#A00000"]}
+                style={{
+                  borderRadius: 20,
+                  padding: isDesktop ? 40 : 24,
+                }}
+              >
+                {/* Header com Badge */}
+                <View className="items-center mb-8">
+                  <View className="bg-yellowaccent rounded-full px-5 py-2 mb-4">
+                    <Text className="text-navy text-sm font-bold uppercase tracking-wider">
+                      Bônus Exclusivo
+                    </Text>
+                  </View>
+                  <View className="bg-white/20 rounded-full p-5 mb-4">
+                    <Ionicons name="calendar-outline" size={isDesktop ? 56 : 48} color="white" />
+                  </View>
+                  <Text
+                    className="text-white font-bold text-center mb-3"
+                    style={{ fontSize: isDesktop ? 32 : 26 }}
+                  >
+                    3 Meses de Acompanhamento
+                  </Text>
+                  <Text
+                    className="text-yellowaccent text-center font-semibold"
+                    style={{ fontSize: isDesktop ? 20 : 18 }}
+                  >
+                    Encontros 1 a 1 Quinzenais
+                  </Text>
+                </View>
+
+                {/* Cards Grid */}
                 <View
-                  className="bg-white/10 rounded-2xl p-5 backdrop-blur"
                   style={
                     isDesktop
-                      ? { flex: 1 }
-                      : { marginBottom: 16 }
+                      ? { flexDirection: "row", gap: 16, marginBottom: 24 }
+                      : { marginBottom: 24 }
                   }
                 >
-                  <View className="bg-yellowaccent rounded-full p-3 mb-3 self-start">
-                    <Ionicons name="analytics" size={28} color="#0F1B2A" />
+                  {/* Card 1 */}
+                  <View
+                    className="bg-white/10 rounded-2xl p-5 backdrop-blur"
+                    style={
+                      isDesktop
+                        ? { flex: 1 }
+                        : { marginBottom: 16 }
+                    }
+                  >
+                    <View className="bg-yellowaccent rounded-full p-3 mb-3 self-start">
+                      <Ionicons name="analytics" size={28} color="#0F1B2A" />
+                    </View>
+                    <Text className="text-white font-bold text-lg mb-2">
+                      Análise dos Dados
+                    </Text>
+                    <Text className="text-white/80 text-sm leading-6">
+                      Revise e organize informações de fornecedores e produtos
+                    </Text>
                   </View>
-                  <Text className="text-white font-bold text-lg mb-2">
-                    Análise dos Dados
-                  </Text>
-                  <Text className="text-white/80 text-sm leading-6">
-                    Revise e organize informações de fornecedores e produtos
-                  </Text>
+
+                  {/* Card 2 */}
+                  <View
+                    className="bg-white/10 rounded-2xl p-5 backdrop-blur"
+                    style={
+                      isDesktop
+                        ? { flex: 1 }
+                        : { marginBottom: 16 }
+                    }
+                  >
+                    <View className="bg-yellowaccent rounded-full p-3 mb-3 self-start">
+                      <Ionicons name="bulb" size={28} color="#0F1B2A" />
+                    </View>
+                    <Text className="text-white font-bold text-lg mb-2">
+                      Estratégia de Implementação
+                    </Text>
+                    <Text className="text-white/80 text-sm leading-6">
+                      Planeje seus próximos passos com orientação especializada
+                    </Text>
+                  </View>
+
+                  {/* Card 3 */}
+                  <View
+                    className="bg-white/10 rounded-2xl p-5 backdrop-blur"
+                    style={isDesktop ? { flex: 1 } : {}}
+                  >
+                    <View className="bg-yellowaccent rounded-full p-3 mb-3 self-start">
+                      <Ionicons name="headset" size={28} color="#0F1B2A" />
+                    </View>
+                    <Text className="text-white font-bold text-lg mb-2">
+                      Suporte Personalizado
+                    </Text>
+                    <Text className="text-white/80 text-sm leading-6">
+                      Tire dúvidas e receba feedback durante sua jornada
+                    </Text>
+                  </View>
                 </View>
 
-                {/* Card 2 */}
-                <View
-                  className="bg-white/10 rounded-2xl p-5 backdrop-blur"
-                  style={
-                    isDesktop
-                      ? { flex: 1 }
-                      : { marginBottom: 16 }
-                  }
-                >
-                  <View className="bg-yellowaccent rounded-full p-3 mb-3 self-start">
-                    <Ionicons name="bulb" size={28} color="#0F1B2A" />
+                {/* Badge Final */}
+                <View className="bg-white rounded-2xl p-4">
+                  <View className="flex-row items-center justify-center">
+                    <Ionicons name="gift" size={24} color="#1A8F5A" />
+                    <Text className="text-navy font-bold text-center text-base ml-2">
+                      Já Incluso no Pacote! Sem Custo Adicional
+                    </Text>
                   </View>
-                  <Text className="text-white font-bold text-lg mb-2">
-                    Estratégia de Implementação
-                  </Text>
-                  <Text className="text-white/80 text-sm leading-6">
-                    Planeje seus próximos passos com orientação especializada
-                  </Text>
                 </View>
-
-                {/* Card 3 */}
-                <View
-                  className="bg-white/10 rounded-2xl p-5 backdrop-blur"
-                  style={isDesktop ? { flex: 1 } : {}}
-                >
-                  <View className="bg-yellowaccent rounded-full p-3 mb-3 self-start">
-                    <Ionicons name="headset" size={28} color="#0F1B2A" />
-                  </View>
-                  <Text className="text-white font-bold text-lg mb-2">
-                    Suporte Personalizado
-                  </Text>
-                  <Text className="text-white/80 text-sm leading-6">
-                    Tire dúvidas e receba feedback durante sua jornada
-                  </Text>
-                </View>
-              </View>
-
-              {/* Badge Final */}
-              <View className="bg-white rounded-2xl p-4">
-                <View className="flex-row items-center justify-center">
-                  <Ionicons name="gift" size={24} color="#1A8F5A" />
-                  <Text className="text-navy font-bold text-center text-base ml-2">
-                    Já Incluso no Pacote! Sem Custo Adicional
-                  </Text>
-                </View>
-              </View>
-            </LinearGradient>
-          </View>
-        </DesktopContainer>
-      </View>
+              </LinearGradient>
+            </View>
+          </DesktopContainer>
+        </LinearGradient>
+      </ImageBackground>
 
       {/* INCLUDED SECTION */}
       <View className={isDesktop ? "py-16 bg-navy" : "px-4 py-10 bg-navy"}>
