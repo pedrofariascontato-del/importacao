@@ -207,6 +207,9 @@ export const HomeScreen = ({ navigation }: Props) => {
               key={item.id}
               title={item.title}
               content={item.content}
+              icon={item.icon as any}
+              color={item.color}
+              dates={item.dates}
             />
           ))}
         </DesktopContainer>
