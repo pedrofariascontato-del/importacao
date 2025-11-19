@@ -38,29 +38,41 @@ export const HomeScreen = ({ navigation }: Props) => {
   const BenefitCard = ({
     icon,
     title,
-    description,
+    highlight,
   }: {
     icon: string;
     title: string;
-    description: string;
+    highlight?: string;
   }) => (
     <View
-      className="bg-white rounded-xl p-5 shadow-md border border-gray-100"
+      className="bg-white rounded-2xl shadow-lg border-2 border-gray-100 overflow-hidden"
       style={
         isDesktop
-          ? { flex: 1, minWidth: 350, maxWidth: 400, margin: 8 }
+          ? { flex: 1, minWidth: 200, maxWidth: 250, margin: 8 }
           : { marginBottom: 16 }
       }
     >
-      <View className="flex-row items-start">
-        <View className="bg-brazilgreen/10 rounded-full p-3 mr-4">
-          <Ionicons name={icon as any} size={28} color="#1A8F5A" />
+      <LinearGradient
+        colors={["#1A8F5A", "#157A4D"]}
+        style={{
+          padding: 20,
+          alignItems: "center",
+        }}
+      >
+        <View className="bg-white rounded-full p-4 mb-3">
+          <Ionicons name={icon as any} size={36} color="#1A8F5A" />
         </View>
-        <View className="flex-1">
-          <Text className="text-navy text-base font-bold mb-1">{title}</Text>
-          <Text className="text-gray-600 text-sm leading-5">{description}</Text>
-        </View>
-      </View>
+        {highlight && (
+          <View className="bg-yellowaccent rounded-full px-3 py-1 mb-2">
+            <Text className="text-navy text-xs font-bold uppercase tracking-wide">
+              {highlight}
+            </Text>
+          </View>
+        )}
+        <Text className="text-white text-center text-base font-bold leading-5">
+          {title}
+        </Text>
+      </LinearGradient>
     </View>
   );
 
@@ -248,7 +260,7 @@ export const HomeScreen = ({ navigation }: Props) => {
                   key={benefit.id}
                   icon={benefit.icon}
                   title={benefit.title}
-                  description={benefit.description}
+                  highlight={benefit.highlight}
                 />
               ))}
             </View>
@@ -259,7 +271,7 @@ export const HomeScreen = ({ navigation }: Props) => {
                   key={benefit.id}
                   icon={benefit.icon}
                   title={benefit.title}
-                  description={benefit.description}
+                  highlight={benefit.highlight}
                 />
               ))}
             </View>

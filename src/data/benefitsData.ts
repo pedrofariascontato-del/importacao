@@ -2,62 +2,44 @@ export interface Benefit {
   id: string;
   icon: string;
   title: string;
-  description: string;
+  highlight?: string;
 }
 
 export const benefitsData: Benefit[] = [
   {
     id: "1",
     icon: "business",
-    title: "Acesso direto a fornecedores",
-    description: "Fornecedores reais e fábricas confiáveis já pré-selecionados",
+    title: "Fornecedores Reais",
+    highlight: "Acesso Direto",
   },
   {
     id: "2",
     icon: "storefront",
-    title: "Maiores feiras do mundo",
-    description: "Incluindo a famosa Canton Fair e o mercado de Yiwu",
+    title: "Canton Fair + Yiwu",
+    highlight: "Maiores Feiras",
   },
   {
     id: "3",
     icon: "shield-checkmark",
-    title: "Acompanhamento total",
-    description: "Suporte completo durante todos os 30 dias da jornada",
+    title: "Suporte 24/7",
+    highlight: "30 Dias Completos",
   },
   {
     id: "4",
     icon: "people",
-    title: "Networking exclusivo",
-    description: "Conecte-se com empresários do Brasil inteiro",
+    title: "Empresários BR",
+    highlight: "Networking",
   },
   {
     id: "5",
     icon: "cash",
-    title: "Negociação profissional",
-    description: "Aprenda técnicas de negociação como um profissional",
+    title: "Técnicas Avançadas",
+    highlight: "Negociação",
   },
   {
     id: "6",
-    icon: "globe",
-    title: "Maiores mercados atacadistas",
-    description: "Conheça pessoalmente os gigantes como Yiwu Market",
-  },
-  {
-    id: "7",
-    icon: "boat",
-    title: "Logística na prática",
-    description: "Entenda fretes, inspeções e alfândega de forma prática",
-  },
-  {
-    id: "8",
-    icon: "lock-closed",
-    title: "Segurança garantida",
-    description: "Organização e segurança durante toda a viagem",
-  },
-  {
-    id: "9",
-    icon: "rocket",
-    title: "Transformação real",
-    description: "Transforme sua ideia em negócio real em apenas 30 dias",
+    icon: "airplane",
+    title: "Tudo Incluso",
+    highlight: "Sem Surpresas",
   },
 ];
