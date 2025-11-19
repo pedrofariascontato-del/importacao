@@ -228,61 +228,73 @@ export const HomeScreen = ({ navigation }: Props) => {
       </View>
 
       {/* BENEFITS SECTION */}
-      <View className={isDesktop ? "py-16 bg-gray-50" : "px-4 py-10 bg-gray-50"}>
-        <DesktopContainer>
-          <View className="items-center mb-8">
-            <View className="bg-brazilgreen rounded-full p-3 mb-3">
-              <Ionicons name="star" size={32} color="white" />
+      <ImageBackground
+        source={require("../../assets/background-1763595075294.png")}
+        resizeMode="cover"
+        style={{ width: "100%" }}
+      >
+        <LinearGradient
+          colors={["rgba(241, 245, 249, 0.95)", "rgba(248, 250, 252, 0.92)", "rgba(241, 245, 249, 0.95)"]}
+          style={{
+            paddingVertical: isDesktop ? 64 : 40,
+            paddingHorizontal: isDesktop ? 0 : 16,
+          }}
+        >
+          <DesktopContainer>
+            <View className="items-center mb-8">
+              <View className="bg-brazilgreen rounded-full p-3 mb-3">
+                <Ionicons name="star" size={32} color="white" />
+              </View>
+              <Text
+                className="text-navy font-bold text-center mb-2"
+                style={{ fontSize: isDesktop ? 36 : 24 }}
+              >
+                Por Que Participar
+              </Text>
+              <Text className="text-gray-600 text-base text-center max-w-2xl px-4">
+                Vantagens exclusivas desta imersão internacional
+              </Text>
             </View>
-            <Text
-              className="text-navy font-bold text-center mb-2"
-              style={{ fontSize: isDesktop ? 36 : 24 }}
-            >
-              Por Que Participar
-            </Text>
-            <Text className="text-gray-600 text-base text-center max-w-2xl px-4">
-              Vantagens exclusivas desta imersão internacional
-            </Text>
-          </View>
 
-          {/* Grid Desktop */}
-          {isDesktop ? (
-            <View
-              style={{
-                flexDirection: "row",
-                flexWrap: "wrap",
-                justifyContent: "center",
-                marginHorizontal: -8,
-              }}
-            >
-              {benefitsData.map((benefit) => (
-                <BenefitCard
-                  key={benefit.id}
-                  icon={benefit.icon}
-                  title={benefit.title}
-                  highlight={benefit.highlight}
-                />
-              ))}
-            </View>
-          ) : (
-            <View>
-              {benefitsData.map((benefit) => (
-                <BenefitCard
-                  key={benefit.id}
-                  icon={benefit.icon}
-                  title={benefit.title}
-                  highlight={benefit.highlight}
-                />
-              ))}
-            </View>
-          )}
+            {/* Grid Desktop */}
+            {isDesktop ? (
+              <View
+                style={{
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  justifyContent: "center",
+                  marginHorizontal: -8,
+                }}
+              >
+                {benefitsData.map((benefit) => (
+                  <BenefitCard
+                    key={benefit.id}
+                    icon={benefit.icon}
+                    title={benefit.title}
+                    highlight={benefit.highlight}
+                  />
+                ))}
+              </View>
+            ) : (
+              <View>
+                {benefitsData.map((benefit) => (
+                  <BenefitCard
+                    key={benefit.id}
+                    icon={benefit.icon}
+                    title={benefit.title}
+                    highlight={benefit.highlight}
+                  />
+                ))}
+              </View>
+            )}
 
-          {/* CTA after benefits */}
-          <View className="mt-8">
-            <CTAButton text="Quero me pré-inscrever agora" />
-          </View>
-        </DesktopContainer>
-      </View>
+            {/* CTA after benefits */}
+            <View className="mt-8">
+              <CTAButton text="Quero me pré-inscrever agora" />
+            </View>
+          </DesktopContainer>
+        </LinearGradient>
+      </ImageBackground>
 
       {/* MENTORSHIP SECTION */}
       <View className={isDesktop ? "py-16 bg-white" : "px-4 py-10 bg-white"}>
