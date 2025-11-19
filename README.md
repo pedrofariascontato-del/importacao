@@ -56,36 +56,34 @@ A landing page utiliza uma identidade visual que mescla Brasil e China:
 
 ## Seções da Landing Page
 
-### 1. VSL Section (Topo)
-- Espaço reservado para vídeo VSL
-- Altura de 280px (250px conteúdo + safe area)
-- Placeholder com ícone de play
-- Fundo preto para destaque do vídeo
-
-### 2. Hero Section
+### 1. Hero Section com VSL Integrado
+- Badge "Imersão Internacional"
 - Headline impactante
-- Subtítulo de autoridade
+- Ícone de avião
+- "Direto em Solo Chinês"
+- **Vídeo VSL do YouTube integrado** (altura 220px)
+- Subtítulo: "Uma experiência completa, guiada por especialistas..."
 - Contador regressivo destacado
 - CTA principal vermelho
 
-### 3. Cronograma Completo
+### 2. Cronograma Completo
 - 9 períodos detalhados em accordion
 - Expandíveis com animação suave
 - Descrição completa de cada fase da viagem
 
-### 4. Por Que Participar
+### 3. Por Que Participar
 - 9 cards de benefícios
 - Ícones ilustrativos
 - Layout em grid responsivo
 - CTA adicional após benefícios
 
-### 5. O Que Está Incluso
+### 4. O Que Está Incluso
 - Lista com 16 itens inclusos
 - Checkmarks em verde Brasil
 - Fundo azul marinho premium
 - CTA antes da seção final
 
-### 6. CTA Final
+### 5. CTA Final
 - Seção com gradient vermelho
 - Mensagem urgente e persuasiva
 - CTA em branco contrastante
@@ -93,7 +91,7 @@ A landing page utiliza uma identidade visual que mescla Brasil e China:
 
 ## Fluxo do Usuário
 
-1. **Página Inicial**: Usuário vê o VSL no topo
+1. **Hero com VSL**: Usuário vê headline, vídeo VSL do YouTube integrado e contador
 2. **Scroll**: Navega pela landing page conhecendo a imersão
 3. **Cronograma**: Expande accordions para ver detalhes
 4. **Benefícios**: Conhece vantagens através dos cards
@@ -141,36 +139,33 @@ A landing page possui 4 CTAs estrategicamente posicionados:
 
 Todos abrem o modal de formulário.
 
-## Implementando o VSL (Vídeo)
+## Vídeo VSL Integrado
 
-Para adicionar seu vídeo VSL, você tem duas opções:
+O vídeo VSL do YouTube já está integrado na landing page!
 
-### Opção 1: Vídeo Hospedado (YouTube, Vimeo)
-Substitua o placeholder na HomeScreen.tsx (linhas 70-86) por:
+**Localização**: Entre "Direto em Solo Chinês" e "Uma experiência completa..."
+
+**Vídeo atual**: https://www.youtube.com/watch?v=uPfhib9zHtc
+
+### Para trocar o vídeo:
+Edite `HomeScreen.tsx` (linha 102):
 ```typescript
-import { WebView } from 'react-native-webview';
-
-// No JSX:
-<View className="bg-black" style={{ paddingTop: insets.top, height: 280 }}>
-  <WebView
-    source={{ uri: 'https://www.youtube.com/embed/SEU_VIDEO_ID' }}
-    style={{ height: 250 }}
-  />
-</View>
+<WebView
+  source={{ uri: "https://www.youtube.com/embed/SEU_NOVO_VIDEO_ID" }}
+  style={{ width: "100%", height: 220 }}
+  allowsFullscreenVideo
+  javaScriptEnabled
+  domStorageEnabled
+/>
 ```
 
-### Opção 2: Vídeo Local
-Use expo-video (já instalado):
-```typescript
-import { VideoView, useVideoPlayer } from 'expo-video';
-
-// Coloque o vídeo em assets/video.mp4 e importe:
-const videoSource = require('../../assets/video.mp4');
-```
+**Dica**: Extraia apenas o ID do vídeo da URL do YouTube.
+- URL completa: `https://www.youtube.com/watch?v=uPfhib9zHtc`
+- Use no embed: `https://www.youtube.com/embed/uPfhib9zHtc`
 
 ## Próximos Passos Sugeridos
 
-- [ ] Adicionar vídeo VSL real
+- [x] ~~Adicionar vídeo VSL real~~ ✅ Concluído!
 - [ ] Integrar formulário com backend/API
 - [ ] Adicionar analytics (tracking de eventos)
 - [ ] Implementar compartilhamento social
@@ -229,5 +224,6 @@ src/
 ---
 
 **Última atualização**: Hoje
-**Versão**: 2.0
-**Mudanças**: Formulário movido para modal, VSL adicionado no topo
+**Versão**: 2.1
+**Mudanças**: VSL do YouTube integrado entre "Direto em Solo Chinês" e subtítulo
+

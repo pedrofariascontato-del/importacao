@@ -4,6 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { WebView } from "react-native-webview";
 import { CountdownTimer } from "../components/CountdownTimer";
 import { AccordionItem } from "../components/AccordionItem";
 import { scheduleData } from "../data/scheduleData";
@@ -67,28 +68,10 @@ export const HomeScreen = ({ navigation }: Props) => {
       className="flex-1 bg-gray-50"
       showsVerticalScrollIndicator={false}
     >
-      {/* VSL SECTION */}
-      <View
-        className="bg-black"
-        style={{ paddingTop: insets.top, minHeight: 280 }}
-      >
-        <View className="items-center justify-center" style={{ height: 250 }}>
-          <View className="bg-navy/80 rounded-full p-6 mb-4">
-            <Ionicons name="play-circle" size={60} color="#F2C400" />
-          </View>
-          <Text className="text-white text-sm font-semibold uppercase tracking-wider">
-            Assista ao Vídeo
-          </Text>
-          <Text className="text-gray-400 text-xs mt-2 px-4 text-center">
-            Espaço reservado para seu VSL
-          </Text>
-        </View>
-      </View>
-
       {/* HERO SECTION */}
       <LinearGradient
         colors={["#0F1B2A", "#1A2B3D", "#0F1B2A"]}
-        style={{ paddingTop: 30, paddingBottom: 30 }}
+        style={{ paddingTop: insets.top + 20, paddingBottom: 30 }}
       >
         <View className="px-4">
           {/* Logo/Badge */}
@@ -112,6 +95,17 @@ export const HomeScreen = ({ navigation }: Props) => {
           <Text className="text-white text-xl font-bold text-center mb-6">
             Direto em Solo Chinês
           </Text>
+
+          {/* VSL SECTION */}
+          <View className="mb-6 rounded-2xl overflow-hidden bg-black">
+            <WebView
+              source={{ uri: "https://www.youtube.com/embed/uPfhib9zHtc" }}
+              style={{ width: "100%", height: 220 }}
+              allowsFullscreenVideo
+              javaScriptEnabled
+              domStorageEnabled
+            />
+          </View>
 
           {/* Subtitle */}
           <Text className="text-gray-300 text-base text-center mb-6 leading-6 px-2">
