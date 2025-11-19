@@ -4,7 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { WebView } from "react-native-webview";
+import { VideoPlayer } from "../components/VideoPlayer";
 import { CountdownTimer } from "../components/CountdownTimer";
 import { AccordionItem } from "../components/AccordionItem";
 import { scheduleData } from "../data/scheduleData";
@@ -97,14 +97,8 @@ export const HomeScreen = ({ navigation }: Props) => {
           </Text>
 
           {/* VSL SECTION */}
-          <View className="mb-6 rounded-2xl overflow-hidden bg-black">
-            <WebView
-              source={{ uri: "https://www.youtube.com/embed/uPfhib9zHtc" }}
-              style={{ width: "100%", height: 220 }}
-              allowsFullscreenVideo
-              javaScriptEnabled
-              domStorageEnabled
-            />
+          <View className="mb-6">
+            <VideoPlayer videoUrl="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" />
           </View>
 
           {/* Subtitle */}

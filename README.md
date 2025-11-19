@@ -139,29 +139,43 @@ A landing page possui 4 CTAs estrategicamente posicionados:
 
 Todos abrem o modal de formulário.
 
-## Vídeo VSL Integrado
+## Vídeo VSL Profissional com Expo Video
 
-O vídeo VSL do YouTube já está integrado na landing page!
+O vídeo VSL agora usa **expo-video** para uma experiência nativa de alta qualidade!
 
 **Localização**: Entre "Direto em Solo Chinês" e "Uma experiência completa..."
 
-**Vídeo atual**: https://www.youtube.com/watch?v=uPfhib9zHtc
+### Recursos do Player:
+✅ Controles nativos de reprodução
+✅ Suporte a fullscreen
+✅ Picture-in-Picture
+✅ Botão de play personalizado (amarelo)
+✅ Loading indicator elegante
+✅ Performance superior ao WebView
 
-### Para trocar o vídeo:
-Edite `HomeScreen.tsx` (linha 102):
+### Para adicionar seu vídeo VSL:
+
+**Opção 1: Vídeo Hospedado (Recomendado)**
+Faça upload do seu vídeo VSL para um servidor (Vimeo, AWS S3, etc.) e obtenha a URL direta do arquivo MP4.
+
+Edite `HomeScreen.tsx` (linha 101):
 ```typescript
-<WebView
-  source={{ uri: "https://www.youtube.com/embed/SEU_NOVO_VIDEO_ID" }}
-  style={{ width: "100%", height: 220 }}
-  allowsFullscreenVideo
-  javaScriptEnabled
-  domStorageEnabled
-/>
+<VideoPlayer videoUrl="https://seu-servidor.com/seu-video.mp4" />
 ```
 
-**Dica**: Extraia apenas o ID do vídeo da URL do YouTube.
-- URL completa: `https://www.youtube.com/watch?v=uPfhib9zHtc`
-- Use no embed: `https://www.youtube.com/embed/uPfhib9zHtc`
+**Opção 2: Vídeo Local**
+1. Coloque o arquivo de vídeo em `assets/vsl.mp4`
+2. Crie um novo componente ou modifique o VideoPlayer para aceitar vídeos locais:
+```typescript
+const videoSource = require('../../assets/vsl.mp4');
+```
+
+**Nota sobre YouTube**:
+O YouTube não permite embed direto em apps nativos via MP4. Para usar vídeos do YouTube, você precisará:
+- Baixar o vídeo e hospedar em outro lugar, OU
+- Usar a API oficial do YouTube (mais complexo)
+
+**Vídeo atual**: Demo do Big Buck Bunny (substitua pelo seu VSL)
 
 ## Próximos Passos Sugeridos
 
@@ -224,6 +238,6 @@ src/
 ---
 
 **Última atualização**: Hoje
-**Versão**: 2.1
-**Mudanças**: VSL do YouTube integrado entre "Direto em Solo Chinês" e subtítulo
+**Versão**: 3.0
+**Mudanças**: Player de vídeo profissional com expo-video, controles nativos e melhor qualidade
 
