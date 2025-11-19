@@ -444,62 +444,74 @@ export const HomeScreen = ({ navigation }: Props) => {
       </ImageBackground>
 
       {/* INCLUDED SECTION */}
-      <View className={isDesktop ? "py-16 bg-navy" : "px-4 py-10 bg-navy"}>
-        <DesktopContainer>
-          <View className="items-center mb-8">
-            <View className="bg-yellowaccent rounded-full p-3 mb-3">
-              <Ionicons name="gift" size={32} color="#0F1B2A" />
-            </View>
-            <Text
-              className="text-white font-bold text-center mb-2"
-              style={{ fontSize: isDesktop ? 36 : 24 }}
-            >
-              O Que Está Incluso
-            </Text>
-            <Text className="text-gray-300 text-base text-center max-w-2xl px-4">
-              Tudo que você precisa para uma experiência completa
-            </Text>
-          </View>
-
-          {isDesktop ? (
-            <View
-              style={{
-                flexDirection: "row",
-                flexWrap: "wrap",
-                maxWidth: 900,
-                marginHorizontal: "auto",
-              }}
-            >
-              <View
-                className="bg-white rounded-2xl p-6"
-                style={{ flex: 1, minWidth: 400, margin: 8 }}
+      <ImageBackground
+        source={require("../../assets/background-1763596499273.png")}
+        resizeMode="cover"
+        style={{ width: "100%" }}
+      >
+        <LinearGradient
+          colors={["rgba(15, 27, 42, 0.88)", "rgba(26, 43, 61, 0.85)", "rgba(15, 27, 42, 0.88)"]}
+          style={{
+            paddingVertical: isDesktop ? 64 : 40,
+            paddingHorizontal: isDesktop ? 0 : 16,
+          }}
+        >
+          <DesktopContainer>
+            <View className="items-center mb-8">
+              <View className="bg-yellowaccent rounded-full p-3 mb-3">
+                <Ionicons name="gift" size={32} color="#0F1B2A" />
+              </View>
+              <Text
+                className="text-white font-bold text-center mb-2"
+                style={{ fontSize: isDesktop ? 36 : 24 }}
               >
-                {includedItems.slice(0, 8).map((item) => (
+                O Que Está Incluso
+              </Text>
+              <Text className="text-gray-300 text-base text-center max-w-2xl px-4">
+                Tudo que você precisa para uma experiência completa
+              </Text>
+            </View>
+
+            {isDesktop ? (
+              <View
+                style={{
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  maxWidth: 900,
+                  marginHorizontal: "auto",
+                }}
+              >
+                <View
+                  className="bg-white rounded-2xl p-6"
+                  style={{ flex: 1, minWidth: 400, margin: 8 }}
+                >
+                  {includedItems.slice(0, 8).map((item) => (
+                    <IncludedItem key={item.id} text={item.text} />
+                  ))}
+                </View>
+                <View
+                  className="bg-white rounded-2xl p-6"
+                  style={{ flex: 1, minWidth: 400, margin: 8 }}
+                >
+                  {includedItems.slice(8).map((item) => (
+                    <IncludedItem key={item.id} text={item.text} />
+                  ))}
+                </View>
+              </View>
+            ) : (
+              <View className="bg-white rounded-2xl p-5 mb-6">
+                {includedItems.map((item) => (
                   <IncludedItem key={item.id} text={item.text} />
                 ))}
               </View>
-              <View
-                className="bg-white rounded-2xl p-6"
-                style={{ flex: 1, minWidth: 400, margin: 8 }}
-              >
-                {includedItems.slice(8).map((item) => (
-                  <IncludedItem key={item.id} text={item.text} />
-                ))}
-              </View>
-            </View>
-          ) : (
-            <View className="bg-white rounded-2xl p-5 mb-6">
-              {includedItems.map((item) => (
-                <IncludedItem key={item.id} text={item.text} />
-              ))}
-            </View>
-          )}
+            )}
 
-          <View className="mt-6">
-            <CTAButton text="Garantir minha vaga" />
-          </View>
-        </DesktopContainer>
-      </View>
+            <View className="mt-6">
+              <CTAButton text="Garantir minha vaga" />
+            </View>
+          </DesktopContainer>
+        </LinearGradient>
+      </ImageBackground>
 
       {/* FINAL CTA SECTION */}
       <LinearGradient
