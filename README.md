@@ -1,8 +1,31 @@
 # Landing Page - Imersão China
 
-## Visão Geral
+## 🎯 Visão Geral
 
-Esta é uma landing page profissional e moderna criada para captar leads qualificados para uma imersão de 30 dias na China, focada em ensinar importação direta.
+Landing page profissional e moderna para captar leads qualificados para uma imersão de 30 dias na China focada em importação direta.
+
+### 📱 Multi-Plataforma
+- **Mobile**: App nativo via Vibecode/Expo (iOS/Android)
+- **Web**: Site responsivo publicável no Vercel
+- **Código único** que funciona em ambas plataformas
+
+## 🚀 Deploy no Vercel
+
+✅ **O projeto está 100% pronto para deploy no Vercel!**
+
+### Quick Start:
+```bash
+# 1. Build local (testar)
+bun run build:web
+
+# 2. Deploy no Vercel
+vercel
+
+# 3. Deploy em produção
+vercel --prod
+```
+
+📖 **Guia completo**: Veja o arquivo `DEPLOY_VERCEL.md` para instruções detalhadas.
 
 ## Estrutura do Projeto
 
@@ -26,9 +49,24 @@ Esta é uma landing page profissional e moderna criada para captar leads qualifi
   - Usado para exibir cronograma detalhado dia a dia
 
 - **VideoPlayer** (`src/components/VideoPlayer.tsx`)
-  - Player de vídeo profissional com expo-video
+  - Player de vídeo profissional com expo-video (mobile)
   - Controles customizados e botão de play amarelo
   - Suporte a fullscreen e Picture-in-Picture
+
+- **VideoPlayerWeb** (`src/components/VideoPlayerWeb.tsx`)
+  - Player de vídeo para web com iframe
+  - Suporta YouTube embed
+  - Responsivo e otimizado
+
+- **UnifiedVideoPlayer** (`src/components/UnifiedVideoPlayer.tsx`)
+  - Componente unificado que escolhe automaticamente
+  - VideoPlayer para mobile, VideoPlayerWeb para web
+  - Mesma API em todas plataformas
+
+- **ResponsiveContainer** (`src/components/ResponsiveContainer.tsx`)
+  - Container responsivo para web
+  - Centraliza conteúdo (max-width 1200px)
+  - Transparente no mobile
 
 ### Telas
 
@@ -225,7 +263,11 @@ Edite `HomeScreen.tsx` e `FormScreen.tsx`
 src/
 ├── components/
 │   ├── CountdownTimer.tsx
-│   └── AccordionItem.tsx
+│   ├── AccordionItem.tsx
+│   ├── VideoPlayer.tsx (mobile)
+│   ├── VideoPlayerWeb.tsx (web)
+│   ├── UnifiedVideoPlayer.tsx (universal)
+│   └── ResponsiveContainer.tsx (web responsive)
 ├── data/
 │   ├── scheduleData.ts
 │   ├── benefitsData.ts
@@ -249,9 +291,11 @@ src/
 ---
 
 **Última atualização**: Hoje
-**Versão**: 4.0
+**Versão**: 5.0 🚀
 **Mudanças**:
-- Accordion funcional com LayoutAnimation
-- Cronograma completamente detalhado (dia a dia com horários)
-- Player de vídeo profissional com expo-video
+- ✅ Pronto para deploy no Vercel
+- ✅ Suporte web completo e responsivo
+- ✅ Player de vídeo unificado (mobile + web)
+- ✅ Layout responsivo para desktop/tablet/mobile
+- ✅ vercel.json e configurações prontas
 

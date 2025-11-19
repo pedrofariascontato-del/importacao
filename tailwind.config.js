@@ -32,6 +32,15 @@ module.exports = {
         "8xl": "72px",
         "9xl": "80px",
       },
+      maxWidth: {
+        "screen-xl": "1200px",
+      },
+      screens: {
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+      },
     },
   },
   darkMode: "class",

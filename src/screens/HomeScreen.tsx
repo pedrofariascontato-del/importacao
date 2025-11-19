@@ -4,7 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { VideoPlayer } from "../components/VideoPlayer";
+import { UnifiedVideoPlayer } from "../components/UnifiedVideoPlayer";
 import { CountdownTimer } from "../components/CountdownTimer";
 import { AccordionItem } from "../components/AccordionItem";
 import { scheduleData } from "../data/scheduleData";
@@ -98,7 +98,7 @@ export const HomeScreen = ({ navigation }: Props) => {
 
           {/* VSL SECTION */}
           <View className="mb-6">
-            <VideoPlayer videoUrl="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" />
+            <UnifiedVideoPlayer videoUrl="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" />
           </View>
 
           {/* Subtitle */}
