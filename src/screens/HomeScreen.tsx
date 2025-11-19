@@ -269,6 +269,111 @@ export const HomeScreen = ({ navigation }: Props) => {
         </DesktopContainer>
       </View>
 
+      {/* MENTORSHIP SECTION */}
+      <View className={isDesktop ? "py-16 bg-white" : "px-4 py-10 bg-white"}>
+        <DesktopContainer>
+          <View className="items-center mb-8">
+            <View className="bg-chinared rounded-full p-3 mb-3">
+              <Ionicons name="people" size={32} color="white" />
+            </View>
+            <Text
+              className="text-navy font-bold text-center mb-2"
+              style={{ fontSize: isDesktop ? 36 : 24 }}
+            >
+              Mentoria na Volta
+            </Text>
+            <Text className="text-gray-600 text-base text-center max-w-2xl px-4">
+              Seu sucesso não termina quando você volta para casa
+            </Text>
+          </View>
+
+          <View
+            className="bg-gradient-to-br from-chinared to-red-700 rounded-2xl p-8 shadow-xl"
+            style={
+              isDesktop
+                ? { maxWidth: 800, marginHorizontal: "auto" }
+                : { marginHorizontal: 0 }
+            }
+          >
+            <LinearGradient
+              colors={["#D00000", "#A00000"]}
+              style={{
+                borderRadius: 16,
+                padding: isDesktop ? 32 : 24,
+              }}
+            >
+              <View className="items-center mb-6">
+                <View className="bg-white/20 rounded-full p-4 mb-4">
+                  <Ionicons name="calendar-outline" size={isDesktop ? 48 : 40} color="white" />
+                </View>
+                <Text
+                  className="text-white font-bold text-center mb-2"
+                  style={{ fontSize: isDesktop ? 28 : 22 }}
+                >
+                  3 Meses de Acompanhamento
+                </Text>
+                <Text
+                  className="text-white/90 text-center leading-6"
+                  style={{ fontSize: isDesktop ? 18 : 16 }}
+                >
+                  Encontros 1 a 1 quinzenais
+                </Text>
+              </View>
+
+              <View className="bg-white/10 rounded-xl p-6 mb-6">
+                <View className="flex-row items-start mb-4">
+                  <View className="bg-yellowaccent rounded-full p-2 mr-4">
+                    <Ionicons name="checkmark-circle" size={24} color="#0F1B2A" />
+                  </View>
+                  <View className="flex-1">
+                    <Text className="text-white font-bold text-base mb-1">
+                      Análise dos Dados Coletados
+                    </Text>
+                    <Text className="text-white/80 text-sm leading-5">
+                      Revise e organize todas as informações de fornecedores, produtos e contatos obtidos na China
+                    </Text>
+                  </View>
+                </View>
+
+                <View className="flex-row items-start mb-4">
+                  <View className="bg-yellowaccent rounded-full p-2 mr-4">
+                    <Ionicons name="checkmark-circle" size={24} color="#0F1B2A" />
+                  </View>
+                  <View className="flex-1">
+                    <Text className="text-white font-bold text-base mb-1">
+                      Estratégia de Implementação
+                    </Text>
+                    <Text className="text-white/80 text-sm leading-5">
+                      Planeje seus próximos passos com orientação especializada para transformar conhecimento em resultados
+                    </Text>
+                  </View>
+                </View>
+
+                <View className="flex-row items-start">
+                  <View className="bg-yellowaccent rounded-full p-2 mr-4">
+                    <Ionicons name="checkmark-circle" size={24} color="#0F1B2A" />
+                  </View>
+                  <View className="flex-1">
+                    <Text className="text-white font-bold text-base mb-1">
+                      Suporte Personalizado
+                    </Text>
+                    <Text className="text-white/80 text-sm leading-5">
+                      Tire dúvidas, resolva desafios e receba feedback direto durante sua jornada de implementação
+                    </Text>
+                  </View>
+                </View>
+              </View>
+
+              <View className="bg-yellowaccent rounded-xl p-4">
+                <Text className="text-navy font-bold text-center text-base">
+                  Já Incluso no Pacote! Sem Custo Adicional
+                </Text>
+              </View>
+            </LinearGradient>
+          </View>
+        </DesktopContainer>
+      </View>
+
       {/* INCLUDED SECTION */}
       <View className={isDesktop ? "py-16 bg-navy" : "px-4 py-10 bg-navy"}>
         <DesktopContainer>

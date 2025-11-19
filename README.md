@@ -128,13 +128,24 @@ A landing page utiliza uma identidade visual que mescla Brasil e China:
 - Layout em grid responsivo
 - CTA adicional após benefícios
 
-### 4. O Que Está Incluso
-- Lista com 16 itens inclusos
+### 4. Mentoria na Volta
+- **Nova seção destacada** com design premium em vermelho
+- Destaque para 3 meses de acompanhamento pós-imersão
+- Encontros 1 a 1 quinzenais inclusos no pacote
+- 3 pilares da mentoria:
+  - Análise dos dados coletados na China
+  - Estratégia de implementação personalizada
+  - Suporte contínuo para resolver desafios
+- Badge "Já Incluso no Pacote" em amarelo
+- Ícones e layout premium
+
+### 5. O Que Está Incluso
+- Lista com 18 itens inclusos (incluindo mentoria)
 - Checkmarks em verde Brasil
 - Fundo azul marinho premium
 - CTA antes da seção final
 
-### 5. CTA Final
+### 6. CTA Final
 - Seção com gradient vermelho
 - Mensagem urgente e persuasiva
 - CTA em branco contrastante
@@ -293,8 +304,11 @@ src/
 ---
 
 **Última atualização**: Hoje
-**Versão**: 5.1 🎨
+**Versão**: 5.2 🎯
 **Mudanças**:
+- ✅ Nova seção "Mentoria na Volta" com design premium
+- ✅ Destaque para 3 meses de acompanhamento 1 a 1 quinzenal
+- ✅ Informações sobre mentoria adicionadas aos itens inclusos
 - ✅ Background de gate de embarque na hero section
 - ✅ Imagem com transparência aplicada via gradiente
 - ✅ Visual premium e profissional de aeroporto
@@ -302,5 +316,4 @@ src/
 - ✅ Suporte web completo e responsivo
 - ✅ Player de vídeo unificado (mobile + web)
 - ✅ Layout responsivo para desktop/tablet/mobile
-- ✅ vercel.json e configurações prontas
 

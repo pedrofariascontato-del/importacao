@@ -68,4 +68,12 @@ export const includedItems: IncludedItem[] = [
     id: "16",
     text: "Grupo exclusivo de networking pós-imersão",
   },
+  {
+    id: "17",
+    text: "3 meses de mentoria pós-imersão com encontros 1 a 1 quinzenais",
+  },
+  {
+    id: "18",
+    text: "Acompanhamento personalizado dos dados coletados na China",
+  },
 ];
