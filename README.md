@@ -106,6 +106,7 @@ A landing page utiliza uma identidade visual que mescla Brasil e China:
 ## Seções da Landing Page
 
 ### 1. Hero Section com VSL Integrado
+- **Background de gate de embarque com transparência** (imagem moderna de aeroporto)
 - Badge "Imersão Internacional"
 - Headline impactante
 - Ícone de avião
@@ -114,6 +115,7 @@ A landing page utiliza uma identidade visual que mescla Brasil e China:
 - Subtítulo: "Uma experiência completa, guiada por especialistas..."
 - Contador regressivo destacado
 - CTA principal vermelho
+- Overlay com gradiente escuro (92% opacidade) para garantir legibilidade do texto
 
 ### 2. Cronograma Completo
 - 9 períodos detalhados em accordion
@@ -291,8 +293,11 @@ src/
 ---
 
 **Última atualização**: Hoje
-**Versão**: 5.0 🚀
+**Versão**: 5.1 🎨
 **Mudanças**:
+- ✅ Background de gate de embarque na hero section
+- ✅ Imagem com transparência aplicada via gradiente
+- ✅ Visual premium e profissional de aeroporto
 - ✅ Pronto para deploy no Vercel
 - ✅ Suporte web completo e responsivo
 - ✅ Player de vídeo unificado (mobile + web)

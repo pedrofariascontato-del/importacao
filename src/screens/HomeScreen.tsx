@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, ScrollView, Pressable, Platform } from "react-native";
+import { View, Text, ScrollView, Pressable, Platform, ImageBackground } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -98,85 +98,91 @@ export const HomeScreen = ({ navigation }: Props) => {
       showsVerticalScrollIndicator={false}
     >
       {/* HERO SECTION */}
-      <LinearGradient
-        colors={["#0F1B2A", "#1A2B3D", "#0F1B2A"]}
-        style={{
-          paddingTop: Platform.OS === "web" ? 40 : insets.top + 20,
-          paddingBottom: 60,
-        }}
+      <ImageBackground
+        source={require("../../assets/background-1763590359806.png")}
+        resizeMode="cover"
+        style={{ width: "100%" }}
       >
-        <DesktopContainer>
-          <View className={isDesktop ? "" : "px-4"}>
-            {/* Logo/Badge */}
-            <View className="items-center mb-6">
-              <View className="bg-yellowaccent rounded-full px-6 py-2">
-                <Text className="text-navy text-xs font-bold uppercase tracking-wider">
-                  Imersão Internacional
-                </Text>
-              </View>
-            </View>
-
-            {/* Headline */}
-            <Text
-              className="text-white font-bold text-center mb-4 leading-tight"
-              style={{ fontSize: isDesktop ? 48 : 32 }}
-            >
-              A Imersão Definitiva para Aprender a Importar da China em 30 Dias
-            </Text>
-
-            <View className="items-center mb-2">
-              <Ionicons name="airplane" size={isDesktop ? 32 : 24} color="#F2C400" />
-            </View>
-
-            <Text
-              className="text-white font-bold text-center mb-8"
-              style={{ fontSize: isDesktop ? 28 : 20 }}
-            >
-              Direto em Solo Chinês
-            </Text>
-
-            {/* Layout Desktop: Video e Countdown lado a lado */}
-            {isDesktop ? (
-              <View style={{ flexDirection: "row", gap: 32, marginBottom: 32 }}>
-                {/* VSL */}
-                <View style={{ flex: 1.5 }}>
-                  <UnifiedVideoPlayer videoUrl="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" />
+        <LinearGradient
+          colors={["rgba(15, 27, 42, 0.92)", "rgba(26, 43, 61, 0.88)", "rgba(15, 27, 42, 0.92)"]}
+          style={{
+            paddingTop: Platform.OS === "web" ? 40 : insets.top + 20,
+            paddingBottom: 60,
+          }}
+        >
+          <DesktopContainer>
+            <View className={isDesktop ? "" : "px-4"}>
+              {/* Logo/Badge */}
+              <View className="items-center mb-6">
+                <View className="bg-yellowaccent rounded-full px-6 py-2">
+                  <Text className="text-navy text-xs font-bold uppercase tracking-wider">
+                    Imersão Internacional
+                  </Text>
                 </View>
+              </View>
 
-                {/* Countdown e Subtitle */}
-                <View style={{ flex: 1, justifyContent: "center" }}>
-                  <Text className="text-gray-300 text-lg text-center mb-6 leading-7">
+              {/* Headline */}
+              <Text
+                className="text-white font-bold text-center mb-4 leading-tight"
+                style={{ fontSize: isDesktop ? 48 : 32 }}
+              >
+                A Imersão Definitiva para Aprender a Importar da China em 30 Dias
+              </Text>
+
+              <View className="items-center mb-2">
+                <Ionicons name="airplane" size={isDesktop ? 32 : 24} color="#F2C400" />
+              </View>
+
+              <Text
+                className="text-white font-bold text-center mb-8"
+                style={{ fontSize: isDesktop ? 28 : 20 }}
+              >
+                Direto em Solo Chinês
+              </Text>
+
+              {/* Layout Desktop: Video e Countdown lado a lado */}
+              {isDesktop ? (
+                <View style={{ flexDirection: "row", gap: 32, marginBottom: 32 }}>
+                  {/* VSL */}
+                  <View style={{ flex: 1.5 }}>
+                    <UnifiedVideoPlayer videoUrl="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" />
+                  </View>
+
+                  {/* Countdown e Subtitle */}
+                  <View style={{ flex: 1, justifyContent: "center" }}>
+                    <Text className="text-gray-300 text-lg text-center mb-6 leading-7">
+                      Uma experiência completa, guiada por especialistas, visitando
+                      fábricas, fornecedores e as maiores feiras do mundo.
+                    </Text>
+                    <CountdownTimer />
+                  </View>
+                </View>
+              ) : (
+                <>
+                  {/* VSL SECTION - Mobile/Tablet */}
+                  <View className="mb-6">
+                    <UnifiedVideoPlayer videoUrl="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" />
+                  </View>
+
+                  {/* Subtitle */}
+                  <Text className="text-gray-300 text-base text-center mb-6 leading-6 px-2">
                     Uma experiência completa, guiada por especialistas, visitando
                     fábricas, fornecedores e as maiores feiras do mundo.
                   </Text>
+
+                  {/* Countdown */}
                   <CountdownTimer />
-                </View>
+                </>
+              )}
+
+              {/* CTA */}
+              <View className={isDesktop ? "mt-8" : "mt-6 px-4"}>
+                <CTAButton text="Quero garantir minha pré-inscrição" />
               </View>
-            ) : (
-              <>
-                {/* VSL SECTION - Mobile/Tablet */}
-                <View className="mb-6">
-                  <UnifiedVideoPlayer videoUrl="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" />
-                </View>
-
-                {/* Subtitle */}
-                <Text className="text-gray-300 text-base text-center mb-6 leading-6 px-2">
-                  Uma experiência completa, guiada por especialistas, visitando
-                  fábricas, fornecedores e as maiores feiras do mundo.
-                </Text>
-
-                {/* Countdown */}
-                <CountdownTimer />
-              </>
-            )}
-
-            {/* CTA */}
-            <View className={isDesktop ? "mt-8" : "mt-6 px-4"}>
-              <CTAButton text="Quero garantir minha pré-inscrição" />
             </View>
-          </View>
-        </DesktopContainer>
-      </LinearGradient>
+          </DesktopContainer>
+        </LinearGradient>
+      </ImageBackground>
 
       {/* SCHEDULE SECTION */}
       <View className={isDesktop ? "py-16 bg-white" : "px-4 py-10 bg-white"}>
