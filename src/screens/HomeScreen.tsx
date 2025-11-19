@@ -234,7 +234,7 @@ export const HomeScreen = ({ navigation }: Props) => {
         style={{ width: "100%" }}
       >
         <LinearGradient
-          colors={["rgba(241, 245, 249, 0.75)", "rgba(248, 250, 252, 0.70)", "rgba(241, 245, 249, 0.75)"]}
+          colors={["rgba(0, 0, 0, 0.60)", "rgba(0, 0, 0, 0.55)", "rgba(0, 0, 0, 0.60)"]}
           style={{
             paddingVertical: isDesktop ? 64 : 40,
             paddingHorizontal: isDesktop ? 0 : 16,
@@ -246,12 +246,12 @@ export const HomeScreen = ({ navigation }: Props) => {
                 <Ionicons name="star" size={32} color="white" />
               </View>
               <Text
-                className="text-navy font-bold text-center mb-2"
+                className="text-white font-bold text-center mb-2"
                 style={{ fontSize: isDesktop ? 36 : 24 }}
               >
                 Por Que Participar
               </Text>
-              <Text className="text-gray-600 text-base text-center max-w-2xl px-4">
+              <Text className="text-white/90 text-base text-center max-w-2xl px-4">
                 Vantagens exclusivas desta imersão internacional
               </Text>
             </View>
