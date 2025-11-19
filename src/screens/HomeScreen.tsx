@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, ScrollView, Pressable } from "react-native";
+import { View, Text, ScrollView, Pressable, Platform } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -11,11 +11,13 @@ import { scheduleData } from "../data/scheduleData";
 import { benefitsData } from "../data/benefitsData";
 import { includedItems } from "../data/includedData";
 import { RootStackParamList } from "../navigation/RootNavigator";
+import { useResponsive } from "../hooks/useResponsive";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Home">;
 
 export const HomeScreen = ({ navigation }: Props) => {
   const insets = useSafeAreaInsets();
+  const { isDesktop, isTablet } = useResponsive();
 
   const handleCTAPress = () => {
     navigation.navigate("Form");
@@ -25,6 +27,7 @@ export const HomeScreen = ({ navigation }: Props) => {
     <Pressable
       onPress={handleCTAPress}
       className="bg-chinared rounded-xl py-4 px-8 shadow-lg active:opacity-80"
+      style={isDesktop ? { maxWidth: 400, alignSelf: "center" } : {}}
     >
       <Text className="text-white text-center text-lg font-bold uppercase tracking-wide">
         {text}
@@ -41,7 +44,14 @@ export const HomeScreen = ({ navigation }: Props) => {
     title: string;
     description: string;
   }) => (
-    <View className="bg-white rounded-xl p-5 mb-4 shadow-md border border-gray-100">
+    <View
+      className="bg-white rounded-xl p-5 shadow-md border border-gray-100"
+      style={
+        isDesktop
+          ? { flex: 1, minWidth: 350, maxWidth: 400, margin: 8 }
+          : { marginBottom: 16 }
+      }
+    >
       <View className="flex-row items-start">
         <View className="bg-brazilgreen/10 rounded-full p-3 mr-4">
           <Ionicons name={icon as any} size={28} color="#1A8F5A" />
@@ -63,6 +73,25 @@ export const HomeScreen = ({ navigation }: Props) => {
     </View>
   );
 
+  const DesktopContainer = ({ children }: { children: React.ReactNode }) => (
+    <View
+      style={
+        isDesktop
+          ? {
+              maxWidth: 1200,
+              marginHorizontal: "auto",
+              width: "100%",
+              paddingHorizontal: 40,
+            }
+          : isTablet
+          ? { paddingHorizontal: 32 }
+          : {}
+      }
+    >
+      {children}
+    </View>
+  );
+
   return (
     <ScrollView
       className="flex-1 bg-gray-50"
@@ -71,165 +100,284 @@ export const HomeScreen = ({ navigation }: Props) => {
       {/* HERO SECTION */}
       <LinearGradient
         colors={["#0F1B2A", "#1A2B3D", "#0F1B2A"]}
-        style={{ paddingTop: insets.top + 20, paddingBottom: 30 }}
+        style={{
+          paddingTop: Platform.OS === "web" ? 40 : insets.top + 20,
+          paddingBottom: 60,
+        }}
       >
-        <View className="px-4">
-          {/* Logo/Badge */}
-          <View className="items-center mb-6">
-            <View className="bg-yellowaccent rounded-full px-6 py-2">
-              <Text className="text-navy text-xs font-bold uppercase tracking-wider">
-                Imersão Internacional
-              </Text>
+        <DesktopContainer>
+          <View className={isDesktop ? "" : "px-4"}>
+            {/* Logo/Badge */}
+            <View className="items-center mb-6">
+              <View className="bg-yellowaccent rounded-full px-6 py-2">
+                <Text className="text-navy text-xs font-bold uppercase tracking-wider">
+                  Imersão Internacional
+                </Text>
+              </View>
+            </View>
+
+            {/* Headline */}
+            <Text
+              className="text-white font-bold text-center mb-4 leading-tight"
+              style={{ fontSize: isDesktop ? 48 : 32 }}
+            >
+              A Imersão Definitiva para Aprender a Importar da China em 30 Dias
+            </Text>
+
+            <View className="items-center mb-2">
+              <Ionicons name="airplane" size={isDesktop ? 32 : 24} color="#F2C400" />
+            </View>
+
+            <Text
+              className="text-white font-bold text-center mb-8"
+              style={{ fontSize: isDesktop ? 28 : 20 }}
+            >
+              Direto em Solo Chinês
+            </Text>
+
+            {/* Layout Desktop: Video e Countdown lado a lado */}
+            {isDesktop ? (
+              <View style={{ flexDirection: "row", gap: 32, marginBottom: 32 }}>
+                {/* VSL */}
+                <View style={{ flex: 1.5 }}>
+                  <UnifiedVideoPlayer videoUrl="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" />
+                </View>
+
+                {/* Countdown e Subtitle */}
+                <View style={{ flex: 1, justifyContent: "center" }}>
+                  <Text className="text-gray-300 text-lg text-center mb-6 leading-7">
+                    Uma experiência completa, guiada por especialistas, visitando
+                    fábricas, fornecedores e as maiores feiras do mundo.
+                  </Text>
+                  <CountdownTimer />
+                </View>
+              </View>
+            ) : (
+              <>
+                {/* VSL SECTION - Mobile/Tablet */}
+                <View className="mb-6">
+                  <UnifiedVideoPlayer videoUrl="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" />
+                </View>
+
+                {/* Subtitle */}
+                <Text className="text-gray-300 text-base text-center mb-6 leading-6 px-2">
+                  Uma experiência completa, guiada por especialistas, visitando
+                  fábricas, fornecedores e as maiores feiras do mundo.
+                </Text>
+
+                {/* Countdown */}
+                <CountdownTimer />
+              </>
+            )}
+
+            {/* CTA */}
+            <View className={isDesktop ? "mt-8" : "mt-6 px-4"}>
+              <CTAButton text="Quero garantir minha pré-inscrição" />
             </View>
           </View>
-
-          {/* Headline */}
-          <Text className="text-white text-3xl font-bold text-center mb-4 leading-10">
-            A Imersão Definitiva para Aprender a Importar da China em 30 Dias
-          </Text>
-
-          <View className="items-center mb-2">
-            <Ionicons name="airplane" size={24} color="#F2C400" />
-          </View>
-
-          <Text className="text-white text-xl font-bold text-center mb-6">
-            Direto em Solo Chinês
-          </Text>
-
-          {/* VSL SECTION */}
-          <View className="mb-6">
-            <UnifiedVideoPlayer videoUrl="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" />
-          </View>
-
-          {/* Subtitle */}
-          <Text className="text-gray-300 text-base text-center mb-6 leading-6 px-2">
-            Uma experiência completa, guiada por especialistas, visitando
-            fábricas, fornecedores e as maiores feiras do mundo.
-          </Text>
-
-          {/* Countdown */}
-          <CountdownTimer />
-
-          {/* CTA */}
-          <View className="mt-6 px-4">
-            <CTAButton text="Quero garantir minha pré-inscrição" />
-          </View>
-        </View>
+        </DesktopContainer>
       </LinearGradient>
 
       {/* SCHEDULE SECTION */}
-      <View className="px-4 py-10 bg-white">
-        <View className="items-center mb-6">
-          <View className="bg-navy rounded-full p-3 mb-3">
-            <Ionicons name="calendar" size={32} color="white" />
+      <View className={isDesktop ? "py-16 bg-white" : "px-4 py-10 bg-white"}>
+        <DesktopContainer>
+          <View className="items-center mb-8">
+            <View className="bg-navy rounded-full p-3 mb-3">
+              <Ionicons name="calendar" size={32} color="white" />
+            </View>
+            <Text
+              className="text-navy font-bold text-center mb-2"
+              style={{ fontSize: isDesktop ? 36 : 24 }}
+            >
+              Cronograma Completo
+            </Text>
+            <Text className="text-gray-600 text-base text-center max-w-2xl">
+              30 dias que vão transformar seu futuro profissional
+            </Text>
           </View>
-          <Text className="text-navy text-2xl font-bold text-center mb-2">
-            Cronograma Completo
-          </Text>
-          <Text className="text-gray-600 text-sm text-center">
-            30 dias que vão transformar seu futuro profissional
-          </Text>
-        </View>
 
-        {scheduleData.map((item) => (
-          <AccordionItem
-            key={item.id}
-            title={item.title}
-            content={item.content}
-          />
-        ))}
+          {scheduleData.map((item) => (
+            <AccordionItem
+              key={item.id}
+              title={item.title}
+              content={item.content}
+            />
+          ))}
+        </DesktopContainer>
       </View>
 
       {/* BENEFITS SECTION */}
-      <View className="px-4 py-10 bg-gray-50">
-        <View className="items-center mb-6">
-          <View className="bg-brazilgreen rounded-full p-3 mb-3">
-            <Ionicons name="star" size={32} color="white" />
+      <View className={isDesktop ? "py-16 bg-gray-50" : "px-4 py-10 bg-gray-50"}>
+        <DesktopContainer>
+          <View className="items-center mb-8">
+            <View className="bg-brazilgreen rounded-full p-3 mb-3">
+              <Ionicons name="star" size={32} color="white" />
+            </View>
+            <Text
+              className="text-navy font-bold text-center mb-2"
+              style={{ fontSize: isDesktop ? 36 : 24 }}
+            >
+              Por Que Participar
+            </Text>
+            <Text className="text-gray-600 text-base text-center max-w-2xl px-4">
+              Vantagens exclusivas desta imersão internacional
+            </Text>
           </View>
-          <Text className="text-navy text-2xl font-bold text-center mb-2">
-            Por Que Participar
-          </Text>
-          <Text className="text-gray-600 text-sm text-center px-4">
-            Vantagens exclusivas desta imersão internacional
-          </Text>
-        </View>
 
-        {benefitsData.map((benefit) => (
-          <BenefitCard
-            key={benefit.id}
-            icon={benefit.icon}
-            title={benefit.title}
-            description={benefit.description}
-          />
-        ))}
+          {/* Grid Desktop */}
+          {isDesktop ? (
+            <View
+              style={{
+                flexDirection: "row",
+                flexWrap: "wrap",
+                justifyContent: "center",
+                marginHorizontal: -8,
+              }}
+            >
+              {benefitsData.map((benefit) => (
+                <BenefitCard
+                  key={benefit.id}
+                  icon={benefit.icon}
+                  title={benefit.title}
+                  description={benefit.description}
+                />
+              ))}
+            </View>
+          ) : (
+            <View>
+              {benefitsData.map((benefit) => (
+                <BenefitCard
+                  key={benefit.id}
+                  icon={benefit.icon}
+                  title={benefit.title}
+                  description={benefit.description}
+                />
+              ))}
+            </View>
+          )}
 
-        {/* CTA after benefits */}
-        <View className="mt-4">
-          <CTAButton text="Quero me pré-inscrever agora" />
-        </View>
+          {/* CTA after benefits */}
+          <View className="mt-8">
+            <CTAButton text="Quero me pré-inscrever agora" />
+          </View>
+        </DesktopContainer>
       </View>
 
       {/* INCLUDED SECTION */}
-      <View className="px-4 py-10 bg-navy">
-        <View className="items-center mb-6">
-          <View className="bg-yellowaccent rounded-full p-3 mb-3">
-            <Ionicons name="gift" size={32} color="#0F1B2A" />
+      <View className={isDesktop ? "py-16 bg-navy" : "px-4 py-10 bg-navy"}>
+        <DesktopContainer>
+          <View className="items-center mb-8">
+            <View className="bg-yellowaccent rounded-full p-3 mb-3">
+              <Ionicons name="gift" size={32} color="#0F1B2A" />
+            </View>
+            <Text
+              className="text-white font-bold text-center mb-2"
+              style={{ fontSize: isDesktop ? 36 : 24 }}
+            >
+              O Que Está Incluso
+            </Text>
+            <Text className="text-gray-300 text-base text-center max-w-2xl px-4">
+              Tudo que você precisa para uma experiência completa
+            </Text>
           </View>
-          <Text className="text-white text-2xl font-bold text-center mb-2">
-            O Que Está Incluso
-          </Text>
-          <Text className="text-gray-300 text-sm text-center px-4">
-            Tudo que você precisa para uma experiência completa
-          </Text>
-        </View>
 
-        <View className="bg-white rounded-2xl p-5 mb-6">
-          {includedItems.map((item) => (
-            <IncludedItem key={item.id} text={item.text} />
-          ))}
-        </View>
+          {isDesktop ? (
+            <View
+              style={{
+                flexDirection: "row",
+                flexWrap: "wrap",
+                maxWidth: 900,
+                marginHorizontal: "auto",
+              }}
+            >
+              <View
+                className="bg-white rounded-2xl p-6"
+                style={{ flex: 1, minWidth: 400, margin: 8 }}
+              >
+                {includedItems.slice(0, 8).map((item) => (
+                  <IncludedItem key={item.id} text={item.text} />
+                ))}
+              </View>
+              <View
+                className="bg-white rounded-2xl p-6"
+                style={{ flex: 1, minWidth: 400, margin: 8 }}
+              >
+                {includedItems.slice(8).map((item) => (
+                  <IncludedItem key={item.id} text={item.text} />
+                ))}
+              </View>
+            </View>
+          ) : (
+            <View className="bg-white rounded-2xl p-5 mb-6">
+              {includedItems.map((item) => (
+                <IncludedItem key={item.id} text={item.text} />
+              ))}
+            </View>
+          )}
 
-        <CTAButton text="Garantir minha vaga" />
+          <View className="mt-6">
+            <CTAButton text="Garantir minha vaga" />
+          </View>
+        </DesktopContainer>
       </View>
 
       {/* FINAL CTA SECTION */}
       <LinearGradient
         colors={["#D00000", "#A00000"]}
-        style={{ paddingVertical: 50, paddingHorizontal: 16 }}
+        style={{
+          paddingVertical: isDesktop ? 80 : 50,
+          paddingHorizontal: isDesktop ? 40 : 16,
+        }}
       >
-        <View className="items-center">
-          <Ionicons name="airplane" size={48} color="#F2C400" />
-          <Text className="text-white text-3xl font-bold text-center mt-4 mb-3 leading-10">
-            Pronto para viver 30 dias que podem mudar seu futuro profissional?
-          </Text>
-          <Text className="text-white/90 text-base text-center mb-6 px-4">
-            As vagas são limitadas. Garanta sua pré-inscrição agora!
-          </Text>
-
-          <View className="w-full">
-            <Pressable
-              onPress={handleCTAPress}
-              className="bg-white rounded-xl py-5 px-8 shadow-xl active:opacity-80"
+        <DesktopContainer>
+          <View className="items-center">
+            <Ionicons name="airplane" size={isDesktop ? 64 : 48} color="#F2C400" />
+            <Text
+              className="text-white font-bold text-center mt-6 mb-4 leading-tight"
+              style={{
+                fontSize: isDesktop ? 42 : 28,
+                maxWidth: isDesktop ? 800 : "100%",
+              }}
             >
-              <Text className="text-chinared text-center text-lg font-bold uppercase tracking-wide">
-                Quero garantir minha pré-inscrição agora
-              </Text>
-            </Pressable>
-          </View>
-
-          {/* Mini countdown */}
-          <View className="mt-6 bg-navy/30 rounded-xl p-4">
-            <Text className="text-white text-center text-sm font-semibold">
-              Embarque em 7 de abril de 2026
+              Pronto para viver 30 dias que podem mudar seu futuro profissional?
             </Text>
+            <Text
+              className="text-white/90 text-center mb-8 px-4"
+              style={{
+                fontSize: isDesktop ? 18 : 16,
+                maxWidth: isDesktop ? 600 : "100%",
+              }}
+            >
+              As vagas são limitadas. Garanta sua pré-inscrição agora!
+            </Text>
+
+            <View style={{ width: isDesktop ? 400 : "100%" }}>
+              <Pressable
+                onPress={handleCTAPress}
+                className="bg-white rounded-xl py-5 px-8 shadow-xl active:opacity-80"
+              >
+                <Text className="text-chinared text-center text-lg font-bold uppercase tracking-wide">
+                  Quero garantir minha pré-inscrição agora
+                </Text>
+              </Pressable>
+            </View>
+
+            {/* Mini countdown */}
+            <View className="mt-8 bg-navy/30 rounded-xl p-4">
+              <Text className="text-white text-center text-sm font-semibold">
+                Embarque em 7 de abril de 2026
+              </Text>
+            </View>
           </View>
-        </View>
+        </DesktopContainer>
       </LinearGradient>
 
       {/* Footer */}
       <View
         className="bg-navy py-8 px-4"
-        style={{ paddingBottom: insets.bottom + 20 }}
+        style={{
+          paddingBottom: Platform.OS === "web" ? 40 : insets.bottom + 20,
+        }}
       >
         <Text className="text-gray-400 text-xs text-center">
           © 2026 Imersão China - Todos os direitos reservados
