@@ -21,8 +21,14 @@ Esta é uma landing page profissional e moderna criada para captar leads qualifi
   - Design premium com blocos destacados
 
 - **AccordionItem** (`src/components/AccordionItem.tsx`)
-  - Componente accordion animado com React Native Reanimated
-  - Usado para exibir o cronograma detalhado dos 30 dias
+  - Componente accordion com animação nativa (LayoutAnimation)
+  - Funcional e testado - expande/colapsa corretamente
+  - Usado para exibir cronograma detalhado dia a dia
+
+- **VideoPlayer** (`src/components/VideoPlayer.tsx`)
+  - Player de vídeo profissional com expo-video
+  - Controles customizados e botão de play amarelo
+  - Suporte a fullscreen e Picture-in-Picture
 
 ### Telas
 
@@ -39,7 +45,12 @@ Esta é uma landing page profissional e moderna criada para captar leads qualifi
 
 ### Dados
 
-- **scheduleData.ts** - Cronograma completo dos 30 dias (9 períodos)
+- **scheduleData.ts** - Cronograma SUPER DETALHADO dos 30 dias
+  - 9 períodos com informações dia a dia
+  - Emojis 📍 para melhor visualização
+  - Horários específicos, locais, atividades
+  - Workshops, feiras, tours culturais
+  - Mais de 150 linhas de conteúdo informativo
 - **benefitsData.ts** - 9 benefícios principais da imersão
 - **includedData.ts** - 16 itens inclusos no pacote
 
@@ -238,6 +249,9 @@ src/
 ---
 
 **Última atualização**: Hoje
-**Versão**: 3.0
-**Mudanças**: Player de vídeo profissional com expo-video, controles nativos e melhor qualidade
+**Versão**: 4.0
+**Mudanças**:
+- Accordion funcional com LayoutAnimation
+- Cronograma completamente detalhado (dia a dia com horários)
+- Player de vídeo profissional com expo-video
 

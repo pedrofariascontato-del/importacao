@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, LayoutAnimation, Platform, UIManager } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import Animated, {
-  useAnimatedStyle,
-  withTiming,
-  useSharedValue,
-  measure,
-  useAnimatedRef,
-  runOnUI,
-} from "react-native-reanimated";
+
+// Habilitar LayoutAnimation no Android
+if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+}
 
 interface AccordionItemProps {
   title: string;
@@ -20,34 +17,17 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
   content,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const height = useSharedValue(0);
-  const animatedRef = useAnimatedRef<Animated.View>();
 
   const toggleAccordion = () => {
-    if (isExpanded) {
-      height.value = withTiming(0, { duration: 300 });
-    } else {
-      runOnUI(() => {
-        "worklet";
-        const measured = measure(animatedRef);
-        if (measured) {
-          height.value = withTiming(measured.height, { duration: 300 });
-        }
-      })();
-    }
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setIsExpanded(!isExpanded);
   };
-
-  const animatedStyle = useAnimatedStyle(() => ({
-    height: height.value,
-    opacity: withTiming(isExpanded ? 1 : 0, { duration: 300 }),
-  }));
 
   return (
     <View className="mb-3 bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
       <Pressable
         onPress={toggleAccordion}
-        className="flex-row items-center justify-between p-4 bg-navy/5"
+        className="flex-row items-center justify-between p-4 bg-navy/5 active:bg-navy/10"
       >
         <Text className="text-navy text-base font-bold flex-1 pr-3">
           {title}
@@ -59,13 +39,11 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
         />
       </Pressable>
 
-      <Animated.View style={[animatedStyle, { overflow: "hidden" }]}>
-        <Animated.View ref={animatedRef}>
-          <View className="p-4 pt-2">
-            <Text className="text-gray-700 text-sm leading-6">{content}</Text>
-          </View>
-        </Animated.View>
-      </Animated.View>
+      {isExpanded && (
+        <View className="p-4 pt-3 bg-gray-50">
+          <Text className="text-gray-700 text-sm leading-6">{content}</Text>
+        </View>
+      )}
     </View>
   );
 };
