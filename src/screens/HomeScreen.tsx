@@ -303,7 +303,7 @@ export const HomeScreen = ({ navigation }: Props) => {
         style={{ width: "100%" }}
       >
         <LinearGradient
-          colors={["rgba(255, 255, 255, 0.92)", "rgba(248, 250, 252, 0.88)", "rgba(255, 255, 255, 0.92)"]}
+          colors={["rgba(255, 255, 255, 0.75)", "rgba(248, 250, 252, 0.70)", "rgba(255, 255, 255, 0.75)"]}
           style={{
             paddingVertical: isDesktop ? 64 : 40,
             paddingHorizontal: isDesktop ? 0 : 16,
