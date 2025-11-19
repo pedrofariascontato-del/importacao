@@ -429,13 +429,13 @@ export const HomeScreen = ({ navigation }: Props) => {
                 </View>
 
                 {/* Badge Final */}
-                <View className="bg-white rounded-2xl p-4">
-                  <View className="flex-row items-center justify-center">
-                    <Ionicons name="gift" size={24} color="#1A8F5A" />
-                    <Text className="text-navy font-bold text-center text-base ml-2">
-                      Já Incluso no Pacote! Sem Custo Adicional
-                    </Text>
-                  </View>
+                <View className="bg-yellowaccent rounded-2xl p-5">
+                  <Text className="text-navy font-bold text-center text-lg">
+                    ✨ Já Incluso no Pacote!
+                  </Text>
+                  <Text className="text-navy text-center text-sm mt-1 font-semibold">
+                    Sem Custo Adicional
+                  </Text>
                 </View>
               </LinearGradient>
             </View>
