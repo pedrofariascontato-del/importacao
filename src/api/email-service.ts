@@ -42,7 +42,7 @@ const EMAIL_CONFIG: EmailConfig = {
   serviceId: "service_byal1ui",
   templateId: "template_n5pddyd",
   publicKey: "qseqXXY6lRC21VKp5",
-  recipientEmail: "seu-email@exemplo.com", // Substitua pelo seu email
+  recipientEmail: "chinaimersao@gmail.com",
 };
 
 /**
