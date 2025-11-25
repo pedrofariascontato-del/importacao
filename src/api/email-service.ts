@@ -38,11 +38,11 @@ interface EmailConfig {
  * 4. Copie suas credenciais para cá
  */
 const EMAIL_CONFIG: EmailConfig = {
-  // Substitua com suas credenciais do EmailJS
-  serviceId: "SEU_SERVICE_ID",
-  templateId: "SEU_TEMPLATE_ID",
-  publicKey: "SEU_PUBLIC_KEY",
-  recipientEmail: "seu-email@exemplo.com", // Email que receberá os leads
+  // Credenciais do EmailJS configuradas
+  serviceId: "service_byal1ui",
+  templateId: "template_n5pddyd",
+  publicKey: "qseqXXY6lRC21VKp5",
+  recipientEmail: "seu-email@exemplo.com", // Substitua pelo seu email
 };
 
 /**
