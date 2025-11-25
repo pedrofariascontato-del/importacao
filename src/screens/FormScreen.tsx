@@ -7,17 +7,23 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Platform,
-  Alert,
+  ActivityIndicator,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigation/RootNavigator";
+import { sendLeadEmail } from "../api/email-service";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Form">;
 
 export const FormScreen = ({ navigation }: Props) => {
   const insets = useSafeAreaInsets();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
 
   // Form states
   const [formData, setFormData] = useState({
@@ -36,27 +42,58 @@ export const FormScreen = ({ navigation }: Props) => {
     howFoundUs: "",
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // Validação básica
     if (!formData.fullName || !formData.email || !formData.whatsapp) {
-      Alert.alert(
-        "Campos obrigatórios",
-        "Por favor, preencha nome, e-mail e WhatsApp."
-      );
+      setSubmitStatus({
+        type: "error",
+        message: "Por favor, preencha nome, e-mail e WhatsApp.",
+      });
       return;
     }
 
-    // Aqui você pode adicionar lógica para enviar os dados
-    Alert.alert(
-      "Pré-inscrição enviada!",
-      "Entraremos em contato em breve para dar continuidade ao seu processo de seleção.",
-      [
-        {
-          text: "OK",
-          onPress: () => navigation.goBack(),
-        },
-      ]
-    );
+    // Validação de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setSubmitStatus({
+        type: "error",
+        message: "Por favor, insira um e-mail válido.",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: "" });
+
+    try {
+      // Envia o lead por email
+      const result = await sendLeadEmail(formData);
+
+      if (result.success) {
+        setSubmitStatus({
+          type: "success",
+          message:
+            "Pré-inscrição enviada com sucesso! Entraremos em contato em breve.",
+        });
+
+        // Aguarda 2 segundos para o usuário ver a mensagem
+        setTimeout(() => {
+          navigation.goBack();
+        }, 2000);
+      } else {
+        setSubmitStatus({
+          type: "error",
+          message: result.message || "Erro ao enviar. Tente novamente.",
+        });
+      }
+    } catch (error) {
+      setSubmitStatus({
+        type: "error",
+        message: "Erro ao enviar. Por favor, tente novamente.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const InputField = ({
@@ -151,6 +188,38 @@ export const FormScreen = ({ navigation }: Props) => {
               Preencha os dados abaixo para participar da pré-seleção
             </Text>
           </View>
+
+          {/* Mensagem de Status */}
+          {submitStatus.type && (
+            <View
+              className={`rounded-xl p-4 mb-4 ${
+                submitStatus.type === "success"
+                  ? "bg-green-50 border border-green-300"
+                  : "bg-red-50 border border-red-300"
+              }`}
+            >
+              <View className="flex-row items-center">
+                <Ionicons
+                  name={
+                    submitStatus.type === "success"
+                      ? "checkmark-circle"
+                      : "alert-circle"
+                  }
+                  size={24}
+                  color={submitStatus.type === "success" ? "#059669" : "#DC2626"}
+                />
+                <Text
+                  className={`ml-3 flex-1 ${
+                    submitStatus.type === "success"
+                      ? "text-green-800"
+                      : "text-red-800"
+                  }`}
+                >
+                  {submitStatus.message}
+                </Text>
+              </View>
+            </View>
+          )}
 
           <View className="bg-white rounded-2xl p-5 mb-6 shadow-lg">
             <InputField
@@ -298,11 +367,27 @@ export const FormScreen = ({ navigation }: Props) => {
 
           <Pressable
             onPress={handleSubmit}
-            className="bg-chinared rounded-xl py-4 px-8 shadow-lg active:opacity-80 mb-6"
+            disabled={isSubmitting}
+            className={`rounded-xl py-4 px-8 shadow-lg mb-6 ${
+              isSubmitting
+                ? "bg-gray-400 opacity-70"
+                : "bg-chinared active:opacity-80"
+            }`}
           >
-            <Text className="text-white text-center text-lg font-bold uppercase tracking-wide">
-              Enviar e participar da pré-seleção
-            </Text>
+            <View className="flex-row items-center justify-center">
+              {isSubmitting && (
+                <ActivityIndicator
+                  size="small"
+                  color="white"
+                  style={{ marginRight: 10 }}
+                />
+              )}
+              <Text className="text-white text-center text-lg font-bold uppercase tracking-wide">
+                {isSubmitting
+                  ? "Enviando..."
+                  : "Enviar e participar da pré-seleção"}
+              </Text>
+            </View>
           </Pressable>
         </View>
 

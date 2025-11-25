@@ -179,6 +179,21 @@ Aparece como modal quando usuário clica em qualquer CTA. Coleta:
 
 *Campos obrigatórios com validação
 
+### 📧 Sistema de Email Integrado
+
+✅ **Os leads são enviados automaticamente por email!**
+
+Recursos:
+- ✅ Envio automático via EmailJS
+- ✅ Validação de campos obrigatórios
+- ✅ Validação de formato de email
+- ✅ Loading durante envio
+- ✅ Mensagens de sucesso/erro
+- ✅ Feedback visual em tempo real
+- ✅ Email formatado profissionalmente
+
+**Configure em 5 minutos**: Veja o arquivo `EMAIL_SETUP.md` para instruções completas.
+
 ## Características Técnicas
 
 - **Navegação**: React Navigation Native Stack
@@ -242,13 +257,15 @@ O YouTube não permite embed direto em apps nativos via MP4. Para usar vídeos d
 ## Próximos Passos Sugeridos
 
 - [x] ~~Adicionar vídeo VSL real~~ ✅ Concluído!
-- [ ] Integrar formulário com backend/API
+- [x] ~~Integrar formulário com backend/API~~ ✅ Sistema de email implementado!
+- [ ] Configurar credenciais do EmailJS (veja EMAIL_SETUP.md)
 - [ ] Adicionar analytics (tracking de eventos)
 - [ ] Implementar compartilhamento social
 - [ ] Adicionar depoimentos de participantes anteriores
 - [ ] Criar galeria de fotos das edições passadas
 - [ ] Implementar chat/FAQ
 - [ ] Adicionar pixel de conversão
+- [ ] Integrar com Google Sheets via Zapier (opcional)
 
 ## Personalização
 
@@ -294,8 +311,10 @@ src/
 
 ## Observações Importantes
 
-- O formulário atualmente apenas valida campos obrigatórios
-- Um Alert é exibido após o envio (substituir por integração real)
+- Os leads são enviados automaticamente por email via EmailJS
+- Configure suas credenciais em `src/api/email-service.ts` (veja EMAIL_SETUP.md)
+- Validação completa de campos obrigatórios e formato de email
+- Feedback visual com mensagens de sucesso/erro
 - Todas as cores seguem a identidade visual Brasil + China
 - Layout otimizado para iOS (conforme especificação Vibecode)
 - VSL placeholder pronto para receber vídeo real
@@ -304,16 +323,13 @@ src/
 ---
 
 **Última atualização**: Hoje
-**Versão**: 5.2 🎯
+**Versão**: 5.3 📧
 **Mudanças**:
-- ✅ Nova seção "Mentoria na Volta" com design premium
-- ✅ Destaque para 3 meses de acompanhamento 1 a 1 quinzenal
-- ✅ Informações sobre mentoria adicionadas aos itens inclusos
-- ✅ Background de gate de embarque na hero section
-- ✅ Imagem com transparência aplicada via gradiente
-- ✅ Visual premium e profissional de aeroporto
-- ✅ Pronto para deploy no Vercel
-- ✅ Suporte web completo e responsivo
-- ✅ Player de vídeo unificado (mobile + web)
-- ✅ Layout responsivo para desktop/tablet/mobile
+- ✅ Sistema de email integrado para captura de leads
+- ✅ Validação avançada de campos (email, obrigatórios)
+- ✅ Loading e feedback visual durante envio
+- ✅ Mensagens de sucesso/erro profissionais
+- ✅ Suporte a EmailJS, Webhook (Zapier/Make) ou backend próprio
+- ✅ Email formatado com todos os dados do lead
+- ✅ Documentação completa de configuração (EMAIL_SETUP.md)
 
