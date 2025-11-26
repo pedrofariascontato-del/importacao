@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   View,
   Text,
@@ -41,6 +41,13 @@ export const FormScreen = ({ navigation }: Props) => {
     preferredContact: "",
     howFoundUs: "",
   });
+
+  // Funções otimizadas para atualizar campos
+  const updateField = useCallback((field: keyof typeof formData) => {
+    return (value: string) => {
+      setFormData((prev) => ({ ...prev, [field]: value }));
+    };
+  }, []);
 
   const handleSubmit = async () => {
     // Validação básica
@@ -225,16 +232,14 @@ export const FormScreen = ({ navigation }: Props) => {
             <InputField
               label="Nome completo *"
               value={formData.fullName}
-              onChangeText={(text) =>
-                setFormData({ ...formData, fullName: text })
-              }
+              onChangeText={updateField("fullName")}
               placeholder="Digite seu nome completo"
             />
 
             <InputField
               label="E-mail *"
               value={formData.email}
-              onChangeText={(text) => setFormData({ ...formData, email: text })}
+              onChangeText={updateField("email")}
               placeholder="seu@email.com"
               keyboardType="email-address"
             />
@@ -242,9 +247,7 @@ export const FormScreen = ({ navigation }: Props) => {
             <InputField
               label="WhatsApp *"
               value={formData.whatsapp}
-              onChangeText={(text) =>
-                setFormData({ ...formData, whatsapp: text })
-              }
+              onChangeText={updateField("whatsapp")}
               placeholder="(00) 00000-0000"
               keyboardType="phone-pad"
             />
@@ -252,9 +255,7 @@ export const FormScreen = ({ navigation }: Props) => {
             <SelectField
               label="Você já importa da China?"
               value={formData.alreadyImports}
-              onChangeText={(text) =>
-                setFormData({ ...formData, alreadyImports: text })
-              }
+              onChangeText={updateField("alreadyImports")}
               options={[
                 "Sim, já importo regularmente",
                 "Já importei algumas vezes",
@@ -266,9 +267,7 @@ export const FormScreen = ({ navigation }: Props) => {
             <SelectField
               label="Qual seu objetivo com a imersão?"
               value={formData.objective}
-              onChangeText={(text) =>
-                setFormData({ ...formData, objective: text })
-              }
+              onChangeText={updateField("objective")}
               options={[
                 "Iniciar um negócio de importação",
                 "Expandir negócio existente",
@@ -281,16 +280,14 @@ export const FormScreen = ({ navigation }: Props) => {
             <InputField
               label="Qual seu nicho de produtos?"
               value={formData.niche}
-              onChangeText={(text) => setFormData({ ...formData, niche: text })}
+              onChangeText={updateField("niche")}
               placeholder="Ex: Eletrônicos, moda, decoração..."
             />
 
             <SelectField
               label="Você tem CNPJ ativo?"
               value={formData.hasCNPJ}
-              onChangeText={(text) =>
-                setFormData({ ...formData, hasCNPJ: text })
-              }
+              onChangeText={updateField("hasCNPJ")}
               options={[
                 "Sim, tenho CNPJ ativo",
                 "Não, mas pretendo abrir",
@@ -301,9 +298,7 @@ export const FormScreen = ({ navigation }: Props) => {
             <SelectField
               label="Nível de investimento disponível para importar"
               value={formData.investmentLevel}
-              onChangeText={(text) =>
-                setFormData({ ...formData, investmentLevel: text })
-              }
+              onChangeText={updateField("investmentLevel")}
               options={[
                 "Até R$ 10.000",
                 "De R$ 10.000 a R$ 30.000",
@@ -316,9 +311,7 @@ export const FormScreen = ({ navigation }: Props) => {
             <InputField
               label="Por que você quer participar da imersão?"
               value={formData.whyParticipate}
-              onChangeText={(text) =>
-                setFormData({ ...formData, whyParticipate: text })
-              }
+              onChangeText={updateField("whyParticipate")}
               placeholder="Conte-nos suas motivações e objetivos..."
               multiline
             />
@@ -326,9 +319,7 @@ export const FormScreen = ({ navigation }: Props) => {
             <SelectField
               label="Está disponível para viajar entre 7/04 e 11/05?"
               value={formData.availableToTravel}
-              onChangeText={(text) =>
-                setFormData({ ...formData, availableToTravel: text })
-              }
+              onChangeText={updateField("availableToTravel")}
               options={[
                 "Sim, tenho disponibilidade total",
                 "Sim, mas preciso confirmar datas",
@@ -340,27 +331,21 @@ export const FormScreen = ({ navigation }: Props) => {
             <InputField
               label="Melhor horário para contato"
               value={formData.bestTimeToContact}
-              onChangeText={(text) =>
-                setFormData({ ...formData, bestTimeToContact: text })
-              }
+              onChangeText={updateField("bestTimeToContact")}
               placeholder="Ex: Manhã, tarde ou noite"
             />
 
             <SelectField
               label="Forma preferida de atendimento"
               value={formData.preferredContact}
-              onChangeText={(text) =>
-                setFormData({ ...formData, preferredContact: text })
-              }
+              onChangeText={updateField("preferredContact")}
               options={["WhatsApp", "Ligação telefônica", "Video call"]}
             />
 
             <InputField
               label="Como nos encontrou? (opcional)"
               value={formData.howFoundUs}
-              onChangeText={(text) =>
-                setFormData({ ...formData, howFoundUs: text })
-              }
+              onChangeText={updateField("howFoundUs")}
               placeholder="Ex: Instagram, indicação, Google..."
             />
           </View>
