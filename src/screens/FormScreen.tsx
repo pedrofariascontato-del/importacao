@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -25,33 +25,24 @@ export const FormScreen = ({ navigation }: Props) => {
     message: string;
   }>({ type: null, message: "" });
 
-  // Form states
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    whatsapp: "",
-    alreadyImports: "",
-    objective: "",
-    niche: "",
-    hasCNPJ: "",
-    investmentLevel: "",
-    whyParticipate: "",
-    availableToTravel: "",
-    bestTimeToContact: "",
-    preferredContact: "",
-    howFoundUs: "",
-  });
-
-  // Funções otimizadas para atualizar campos
-  const updateField = useCallback((field: keyof typeof formData) => {
-    return (value: string) => {
-      setFormData((prev) => ({ ...prev, [field]: value }));
-    };
-  }, []);
+  // Form states - usando estados individuais para evitar re-renders
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+  const [alreadyImports, setAlreadyImports] = useState("");
+  const [objective, setObjective] = useState("");
+  const [niche, setNiche] = useState("");
+  const [hasCNPJ, setHasCNPJ] = useState("");
+  const [investmentLevel, setInvestmentLevel] = useState("");
+  const [whyParticipate, setWhyParticipate] = useState("");
+  const [availableToTravel, setAvailableToTravel] = useState("");
+  const [bestTimeToContact, setBestTimeToContact] = useState("");
+  const [preferredContact, setPreferredContact] = useState("");
+  const [howFoundUs, setHowFoundUs] = useState("");
 
   const handleSubmit = async () => {
     // Validação básica
-    if (!formData.fullName || !formData.email || !formData.whatsapp) {
+    if (!fullName || !email || !whatsapp) {
       setSubmitStatus({
         type: "error",
         message: "Por favor, preencha nome, e-mail e WhatsApp.",
@@ -61,7 +52,7 @@ export const FormScreen = ({ navigation }: Props) => {
 
     // Validação de email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
+    if (!emailRegex.test(email)) {
       setSubmitStatus({
         type: "error",
         message: "Por favor, insira um e-mail válido.",
@@ -73,6 +64,23 @@ export const FormScreen = ({ navigation }: Props) => {
     setSubmitStatus({ type: null, message: "" });
 
     try {
+      // Monta o objeto com os dados do formulário
+      const formData = {
+        fullName,
+        email,
+        whatsapp,
+        alreadyImports,
+        objective,
+        niche,
+        hasCNPJ,
+        investmentLevel,
+        whyParticipate,
+        availableToTravel,
+        bestTimeToContact,
+        preferredContact,
+        howFoundUs,
+      };
+
       // Envia o lead por email
       const result = await sendLeadEmail(formData);
 
@@ -231,31 +239,31 @@ export const FormScreen = ({ navigation }: Props) => {
           <View className="bg-white rounded-2xl p-5 mb-6 shadow-lg">
             <InputField
               label="Nome completo *"
-              value={formData.fullName}
-              onChangeText={updateField("fullName")}
+              value={fullName}
+              onChangeText={setFullName}
               placeholder="Digite seu nome completo"
             />
 
             <InputField
               label="E-mail *"
-              value={formData.email}
-              onChangeText={updateField("email")}
+              value={email}
+              onChangeText={setEmail}
               placeholder="seu@email.com"
               keyboardType="email-address"
             />
 
             <InputField
               label="WhatsApp *"
-              value={formData.whatsapp}
-              onChangeText={updateField("whatsapp")}
+              value={whatsapp}
+              onChangeText={setWhatsapp}
               placeholder="(00) 00000-0000"
               keyboardType="phone-pad"
             />
 
             <SelectField
               label="Você já importa da China?"
-              value={formData.alreadyImports}
-              onChangeText={updateField("alreadyImports")}
+              value={alreadyImports}
+              onChangeText={setAlreadyImports}
               options={[
                 "Sim, já importo regularmente",
                 "Já importei algumas vezes",
@@ -266,8 +274,8 @@ export const FormScreen = ({ navigation }: Props) => {
 
             <SelectField
               label="Qual seu objetivo com a imersão?"
-              value={formData.objective}
-              onChangeText={updateField("objective")}
+              value={objective}
+              onChangeText={setObjective}
               options={[
                 "Iniciar um negócio de importação",
                 "Expandir negócio existente",
@@ -279,15 +287,15 @@ export const FormScreen = ({ navigation }: Props) => {
 
             <InputField
               label="Qual seu nicho de produtos?"
-              value={formData.niche}
-              onChangeText={updateField("niche")}
+              value={niche}
+              onChangeText={setNiche}
               placeholder="Ex: Eletrônicos, moda, decoração..."
             />
 
             <SelectField
               label="Você tem CNPJ ativo?"
-              value={formData.hasCNPJ}
-              onChangeText={updateField("hasCNPJ")}
+              value={hasCNPJ}
+              onChangeText={setHasCNPJ}
               options={[
                 "Sim, tenho CNPJ ativo",
                 "Não, mas pretendo abrir",
@@ -297,8 +305,8 @@ export const FormScreen = ({ navigation }: Props) => {
 
             <SelectField
               label="Nível de investimento disponível para importar"
-              value={formData.investmentLevel}
-              onChangeText={updateField("investmentLevel")}
+              value={investmentLevel}
+              onChangeText={setInvestmentLevel}
               options={[
                 "Até R$ 10.000",
                 "De R$ 10.000 a R$ 30.000",
@@ -310,16 +318,16 @@ export const FormScreen = ({ navigation }: Props) => {
 
             <InputField
               label="Por que você quer participar da imersão?"
-              value={formData.whyParticipate}
-              onChangeText={updateField("whyParticipate")}
+              value={whyParticipate}
+              onChangeText={setWhyParticipate}
               placeholder="Conte-nos suas motivações e objetivos..."
               multiline
             />
 
             <SelectField
               label="Está disponível para viajar entre 7/04 e 11/05?"
-              value={formData.availableToTravel}
-              onChangeText={updateField("availableToTravel")}
+              value={availableToTravel}
+              onChangeText={setAvailableToTravel}
               options={[
                 "Sim, tenho disponibilidade total",
                 "Sim, mas preciso confirmar datas",
@@ -330,22 +338,22 @@ export const FormScreen = ({ navigation }: Props) => {
 
             <InputField
               label="Melhor horário para contato"
-              value={formData.bestTimeToContact}
-              onChangeText={updateField("bestTimeToContact")}
+              value={bestTimeToContact}
+              onChangeText={setBestTimeToContact}
               placeholder="Ex: Manhã, tarde ou noite"
             />
 
             <SelectField
               label="Forma preferida de atendimento"
-              value={formData.preferredContact}
-              onChangeText={updateField("preferredContact")}
+              value={preferredContact}
+              onChangeText={setPreferredContact}
               options={["WhatsApp", "Ligação telefônica", "Video call"]}
             />
 
             <InputField
               label="Como nos encontrou? (opcional)"
-              value={formData.howFoundUs}
-              onChangeText={updateField("howFoundUs")}
+              value={howFoundUs}
+              onChangeText={setHowFoundUs}
               placeholder="Ex: Instagram, indicação, Google..."
             />
           </View>
