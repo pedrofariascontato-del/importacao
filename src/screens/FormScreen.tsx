@@ -17,6 +17,78 @@ import { sendLeadEmail } from "../api/email-service";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Form">;
 
+// Componentes movidos para fora para evitar re-criação
+const InputField = ({
+  label,
+  value,
+  onChangeText,
+  placeholder,
+  multiline = false,
+  keyboardType = "default",
+}: {
+  label: string;
+  value: string;
+  onChangeText: (text: string) => void;
+  placeholder?: string;
+  multiline?: boolean;
+  keyboardType?: "default" | "email-address" | "phone-pad";
+}) => (
+  <View className="mb-4">
+    <Text className="text-navy text-sm font-semibold mb-2">{label}</Text>
+    <TextInput
+      value={value}
+      onChangeText={onChangeText}
+      placeholder={placeholder}
+      placeholderTextColor="#9CA3AF"
+      multiline={multiline}
+      numberOfLines={multiline ? 4 : 1}
+      keyboardType={keyboardType}
+      className="bg-white border border-gray-300 rounded-xl px-4 py-3 text-gray-800"
+      style={
+        multiline
+          ? { height: 100, textAlignVertical: "top" }
+          : { height: 50 }
+      }
+    />
+  </View>
+);
+
+const SelectField = ({
+  label,
+  value,
+  onChangeText,
+  options,
+}: {
+  label: string;
+  value: string;
+  onChangeText: (text: string) => void;
+  options: string[];
+}) => (
+  <View className="mb-4">
+    <Text className="text-navy text-sm font-semibold mb-2">{label}</Text>
+    {options.map((option, index) => (
+      <Pressable
+        key={index}
+        onPress={() => onChangeText(option)}
+        className="flex-row items-center mb-2 bg-white border border-gray-300 rounded-xl px-4 py-3"
+      >
+        <View
+          className={`w-5 h-5 rounded-full border-2 mr-3 items-center justify-center ${
+            value === option
+              ? "border-brazilgreen bg-brazilgreen"
+              : "border-gray-400"
+          }`}
+        >
+          {value === option && (
+            <Ionicons name="checkmark" size={14} color="white" />
+          )}
+        </View>
+        <Text className="text-gray-800 text-sm flex-1">{option}</Text>
+      </Pressable>
+    ))}
+  </View>
+);
+
 export const FormScreen = ({ navigation }: Props) => {
   const insets = useSafeAreaInsets();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -110,77 +182,6 @@ export const FormScreen = ({ navigation }: Props) => {
       setIsSubmitting(false);
     }
   };
-
-  const InputField = ({
-    label,
-    value,
-    onChangeText,
-    placeholder,
-    multiline = false,
-    keyboardType = "default",
-  }: {
-    label: string;
-    value: string;
-    onChangeText: (text: string) => void;
-    placeholder?: string;
-    multiline?: boolean;
-    keyboardType?: "default" | "email-address" | "phone-pad";
-  }) => (
-    <View className="mb-4">
-      <Text className="text-navy text-sm font-semibold mb-2">{label}</Text>
-      <TextInput
-        value={value}
-        onChangeText={onChangeText}
-        placeholder={placeholder}
-        placeholderTextColor="#9CA3AF"
-        multiline={multiline}
-        numberOfLines={multiline ? 4 : 1}
-        keyboardType={keyboardType}
-        className="bg-white border border-gray-300 rounded-xl px-4 py-3 text-gray-800"
-        style={
-          multiline
-            ? { height: 100, textAlignVertical: "top" }
-            : { height: 50 }
-        }
-      />
-    </View>
-  );
-
-  const SelectField = ({
-    label,
-    value,
-    onChangeText,
-    options,
-  }: {
-    label: string;
-    value: string;
-    onChangeText: (text: string) => void;
-    options: string[];
-  }) => (
-    <View className="mb-4">
-      <Text className="text-navy text-sm font-semibold mb-2">{label}</Text>
-      {options.map((option, index) => (
-        <Pressable
-          key={index}
-          onPress={() => onChangeText(option)}
-          className="flex-row items-center mb-2 bg-white border border-gray-300 rounded-xl px-4 py-3"
-        >
-          <View
-            className={`w-5 h-5 rounded-full border-2 mr-3 items-center justify-center ${
-              value === option
-                ? "border-brazilgreen bg-brazilgreen"
-                : "border-gray-400"
-            }`}
-          >
-            {value === option && (
-              <Ionicons name="checkmark" size={14} color="white" />
-            )}
-          </View>
-          <Text className="text-gray-800 text-sm flex-1">{option}</Text>
-        </Pressable>
-      ))}
-    </View>
-  );
 
   return (
     <KeyboardAvoidingView
