@@ -2,7 +2,7 @@
  * Email Service
  *
  * Envia os dados do formulário de leads para o email configurado.
- * Usando EmailJS para envio direto do app (sem necessidade de backend).
+ * Usando FormSubmit.co que funciona perfeitamente em React Native.
  */
 
 interface LeadData {
@@ -21,73 +21,52 @@ interface LeadData {
   howFoundUs: string;
 }
 
-interface EmailConfig {
-  serviceId: string;
-  templateId: string;
-  publicKey: string;
-  recipientEmail: string;
-}
-
 /**
- * Configuração do EmailJS
- *
- * Para configurar:
- * 1. Crie uma conta em https://www.emailjs.com/
- * 2. Adicione um serviço de email (Gmail, Outlook, etc)
- * 3. Crie um template de email
- * 4. Copie suas credenciais para cá
+ * Email de destino configurado
  */
-const EMAIL_CONFIG: EmailConfig = {
-  // Credenciais do EmailJS configuradas
-  serviceId: "service_byal1ui",
-  templateId: "template_n5pddyd",
-  publicKey: "qseqXXY6lRC21VKp5",
-  recipientEmail: "chinaimersao@gmail.com",
-};
+const RECIPIENT_EMAIL = "chinaimersao@gmail.com";
 
 /**
- * Envia email com os dados do lead
+ * Envia email com os dados do lead usando FormSubmit.co
  */
 export async function sendLeadEmail(leadData: LeadData): Promise<{
   success: boolean;
   message: string;
 }> {
   try {
-    console.log("🚀 Iniciando envio de email...");
-    console.log("📧 Config:", {
-      serviceId: EMAIL_CONFIG.serviceId,
-      templateId: EMAIL_CONFIG.templateId,
-      publicKey: EMAIL_CONFIG.publicKey.substring(0, 5) + "...",
-      recipientEmail: EMAIL_CONFIG.recipientEmail,
-    });
+    console.log("🚀 Iniciando envio de email via FormSubmit...");
 
-    // Formata os dados do lead em texto legível
-    const formattedData = formatLeadData(leadData);
+    // Prepara o formulário para o FormSubmit
+    const formData = new URLSearchParams();
+    formData.append("_subject", `🎯 Novo Lead - ${leadData.fullName}`);
+    formData.append("_template", "table");
+    formData.append("_captcha", "false");
 
-    // Prepara o corpo do email
-    const emailBody = {
-      to_email: EMAIL_CONFIG.recipientEmail,
-      from_name: leadData.fullName,
-      from_email: leadData.email,
-      subject: `Novo Lead - ${leadData.fullName}`,
-      message: formattedData,
-      ...leadData, // Envia todos os campos individualmente também
-    };
+    // Adiciona todos os campos do lead
+    formData.append("Nome", leadData.fullName);
+    formData.append("Email", leadData.email);
+    formData.append("WhatsApp", leadData.whatsapp);
+    formData.append("Já importa da China", leadData.alreadyImports || "Não informado");
+    formData.append("Objetivo", leadData.objective || "Não informado");
+    formData.append("Nicho de produtos", leadData.niche || "Não informado");
+    formData.append("Possui CNPJ", leadData.hasCNPJ || "Não informado");
+    formData.append("Investimento disponível", leadData.investmentLevel || "Não informado");
+    formData.append("Por que participar", leadData.whyParticipate || "Não informado");
+    formData.append("Pode viajar", leadData.availableToTravel || "Não informado");
+    formData.append("Melhor horário", leadData.bestTimeToContact || "Não informado");
+    formData.append("Forma preferida de contato", leadData.preferredContact || "Não informado");
+    formData.append("Como nos encontrou", leadData.howFoundUs || "Não informado");
 
-    console.log("📦 Payload preparado");
+    console.log("📦 Enviando para FormSubmit...");
 
-    // Envia via EmailJS
-    const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+    // Envia via FormSubmit.co
+    const response = await fetch(`https://formsubmit.co/${RECIPIENT_EMAIL}`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Accept": "application/json",
       },
-      body: JSON.stringify({
-        service_id: EMAIL_CONFIG.serviceId,
-        template_id: EMAIL_CONFIG.templateId,
-        user_id: EMAIL_CONFIG.publicKey,
-        template_params: emailBody,
-      }),
+      body: formData.toString(),
     });
 
     console.log("📬 Resposta recebida:", response.status, response.statusText);
@@ -101,7 +80,7 @@ export async function sendLeadEmail(leadData: LeadData): Promise<{
     } else {
       const errorText = await response.text();
       console.error("❌ Erro na resposta:", errorText);
-      throw new Error(`Falha ao enviar email: ${response.status} - ${errorText}`);
+      throw new Error(`Falha ao enviar email: ${response.status}`);
     }
   } catch (error) {
     console.error("❌ Erro ao enviar lead por email:", error);
@@ -165,11 +144,7 @@ Como nos encontrou: ${data.howFoundUs || "Não informado"}
  * Valida se o serviço de email está configurado
  */
 export function isEmailServiceConfigured(): boolean {
-  return (
-    EMAIL_CONFIG.serviceId !== "SEU_SERVICE_ID" &&
-    EMAIL_CONFIG.templateId !== "SEU_TEMPLATE_ID" &&
-    EMAIL_CONFIG.publicKey !== "SEU_PUBLIC_KEY"
-  );
+  return true;
 }
 
 /**
