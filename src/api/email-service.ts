@@ -53,6 +53,14 @@ export async function sendLeadEmail(leadData: LeadData): Promise<{
   message: string;
 }> {
   try {
+    console.log("🚀 Iniciando envio de email...");
+    console.log("📧 Config:", {
+      serviceId: EMAIL_CONFIG.serviceId,
+      templateId: EMAIL_CONFIG.templateId,
+      publicKey: EMAIL_CONFIG.publicKey.substring(0, 5) + "...",
+      recipientEmail: EMAIL_CONFIG.recipientEmail,
+    });
+
     // Formata os dados do lead em texto legível
     const formattedData = formatLeadData(leadData);
 
@@ -65,6 +73,8 @@ export async function sendLeadEmail(leadData: LeadData): Promise<{
       message: formattedData,
       ...leadData, // Envia todos os campos individualmente também
     };
+
+    console.log("📦 Payload preparado");
 
     // Envia via EmailJS
     const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
@@ -80,19 +90,24 @@ export async function sendLeadEmail(leadData: LeadData): Promise<{
       }),
     });
 
+    console.log("📬 Resposta recebida:", response.status, response.statusText);
+
     if (response.ok) {
+      console.log("✅ Email enviado com sucesso!");
       return {
         success: true,
         message: "Lead enviado com sucesso!",
       };
     } else {
-      throw new Error("Falha ao enviar email");
+      const errorText = await response.text();
+      console.error("❌ Erro na resposta:", errorText);
+      throw new Error(`Falha ao enviar email: ${response.status} - ${errorText}`);
     }
   } catch (error) {
-    console.error("Erro ao enviar lead por email:", error);
+    console.error("❌ Erro ao enviar lead por email:", error);
     return {
       success: false,
-      message: "Erro ao enviar. Por favor, tente novamente.",
+      message: error instanceof Error ? error.message : "Erro ao enviar. Por favor, tente novamente.",
     };
   }
 }
