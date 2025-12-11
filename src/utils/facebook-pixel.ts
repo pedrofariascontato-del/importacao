@@ -45,8 +45,15 @@ export async function trackPixelEvent(
         {
           event_name: eventName,
           event_time: Math.floor(Date.now() / 1000),
-          action_source: "app",
-          user_data: userData || {},
+          event_source_url: "https://imersaochina.com",
+          action_source: "website",
+          user_data: {
+            client_ip_address: "0.0.0.0",
+            client_user_agent: "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+            fbc: "fb.1.1" + Date.now(),
+            fbp: "fb.1.1" + Date.now(),
+            ...userData,
+          },
           custom_data: customData || {},
         },
       ],
