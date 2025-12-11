@@ -14,7 +14,6 @@ import { Ionicons } from "@expo/vector-icons";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigation/RootNavigator";
 import { sendLeadEmail } from "../api/email-service";
-import { trackLead } from "../utils/facebook-pixel";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Form">;
 
@@ -158,9 +157,6 @@ export const FormScreen = ({ navigation }: Props) => {
       const result = await sendLeadEmail(formData);
 
       if (result.success) {
-        // Rastreia o evento de Lead no Meta Pixel
-        await trackLead("Zaveno Trading - Imersão China");
-
         setSubmitStatus({
           type: "success",
           message:

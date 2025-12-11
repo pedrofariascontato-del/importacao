@@ -8,95 +8,6 @@ Landing page profissional e moderna para captar leads qualificados para uma imer
 **Domínio**: imersaochina.com
 **Negócio**: Zaveno Trading - Viagem imersiva na China para encontrar fornecedores
 
-## 📊 Meta Pixel Integrado
-
-### ✅ Pixel ID: `2671738819859416`
-
-O Meta Pixel (Facebook Pixel) está completamente integrado usando a Conversions API para mobile:
-
-#### 🎯 Eventos Rastreados:
-- ✅ **PageView** - Visualizações de tela (Home, etc)
-- ✅ **Lead** - Cadastros de formulário (**evento principal**)
-- ✅ **ViewContent** - Visualização de conteúdo específico
-- ✅ **Todos os eventos padrão do Meta Pixel disponíveis**
-
-#### 📱 Implementação Atual:
-
-**Home Screen** (`src/screens/HomeScreen.tsx`):
-```typescript
-// Rastreia visualização da página inicial
-useEffect(() => {
-  trackPageView("Home - Imersão China");
-}, []);
-```
-
-**Form Screen** (`src/screens/FormScreen.tsx`):
-```typescript
-// Rastreia quando um lead é capturado com sucesso
-if (result.success) {
-  await trackLead("Zaveno Trading - Imersão China");
-}
-```
-
-#### 🔧 Arquivos de Tracking:
-
-- **`src/config/meta-pixel.ts`** - Configuração e credenciais do Pixel
-- **`src/utils/meta-pixel.ts`** - Serviço completo com Conversions API
-- **`src/utils/facebook-pixel.ts`** - Implementação ativa no app
-
-#### 📊 Eventos Disponíveis:
-
-Você pode rastrear qualquer evento padrão do Meta:
-
-```typescript
-import { trackPixelEvent, PixelEvents } from './src/utils/facebook-pixel';
-
-// Lead (já implementado no formulário)
-await trackLead("Nome do Lead");
-
-// PageView (já implementado na Home)
-await trackPageView("Nome da Página");
-
-// Outros eventos disponíveis
-await trackPixelEvent(PixelEvents.Purchase, { value: 100, currency: "BRL" });
-await trackPixelEvent(PixelEvents.InitiateCheckout, { value: 100 });
-await trackPixelEvent(PixelEvents.Search, { search_string: "termo" });
-await trackPixelEvent(PixelEvents.ViewContent, { content_name: "produto" });
-```
-
-#### ⚙️ Configuração:
-
-As credenciais estão configuradas diretamente em `src/utils/facebook-pixel.ts`:
-- **Pixel ID**: `2671738819859416`
-- **Access Token**: Configurado e funcionando
-- **API Version**: `v21.0`
-
-#### 🧪 Tela de Teste:
-
-O app inclui uma tela de teste (`PixelTestScreen`) para validar o funcionamento:
-- Mostra credenciais configuradas
-- Botões para testar cada tipo de evento
-- Log em tempo real dos resultados
-- Acesse via navegação: `navigation.navigate("PixelTest")`
-
-#### 🎯 Como Usar em Novas Telas:
-
-Para adicionar tracking em qualquer tela:
-
-```typescript
-import { trackPageView, trackLead } from '../utils/facebook-pixel';
-
-// No useEffect para PageView
-useEffect(() => {
-  trackPageView("Nome da Tela");
-}, []);
-
-// Ao capturar um lead
-const handleAction = async () => {
-  await trackLead("Descrição do Lead");
-};
-```
-
 ### 📱 Multi-Plataforma
 - **Mobile**: App nativo via Vibecode/Expo (iOS/Android)
 - **Web**: Site responsivo publicável no Vercel
@@ -362,9 +273,9 @@ O YouTube não permite embed direto em apps nativos via MP4. Para usar vídeos d
 
 - [x] ~~Adicionar vídeo VSL real~~ ✅ Concluído!
 - [x] ~~Integrar formulário com backend/API~~ ✅ Sistema de email implementado!
-- [x] ~~Adicionar pixel de conversão~~ ✅ Meta Pixel completamente integrado!
 - [ ] Configurar credenciais do EmailJS (veja EMAIL_SETUP.md)
-- [ ] Adicionar analytics extras (tracking de eventos customizados)
+- [ ] Adicionar pixel de conversão (Meta Pixel)
+- [ ] Adicionar analytics (tracking de eventos)
 - [ ] Implementar compartilhamento social
 - [ ] Adicionar depoimentos de participantes anteriores
 - [ ] Criar galeria de fotos das edições passadas
@@ -426,14 +337,15 @@ src/
 
 ---
 
-**Última atualização**: 11/12/2025
-**Versão**: 7.0 ✨
+**Última atualização**: 09/12/2025
+**Versão**: 6.0 ✨
 **Mudanças recentes**:
-- ✅ Meta Pixel completamente integrado com Conversions API
-- ✅ Pixel ID configurado: 2671738819859416
-- ✅ Tracking de PageView na Home Screen
-- ✅ Tracking de Lead no Form Screen
-- ✅ Tela de teste para validação do Pixel (PixelTestScreen)
-- ✅ Documentação completa no README
-- ✅ Todos os eventos padrão do Meta Pixel disponíveis
+- ✅ Cronograma completamente atualizado com dados da planilha oficial
+- ✅ Agora são 11 períodos separados (antes eram 9)
+- ✅ Informações dia a dia mais detalhadas e específicas
+- ✅ Atividades noturnas especiais incluídas: Night Market, Restaurante Ariana, Yiwu Temple
+- ✅ Detalhes de hotéis 4 e 5 estrelas por período
+- ✅ Workshops e apresentações técnicas incluídas
+- ✅ Informações sobre shuttles e transfers detalhadas
+- ✅ Cronograma alinhado com portfólio Zoveno
 

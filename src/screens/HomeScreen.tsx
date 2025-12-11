@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { View, Text, ScrollView, Pressable, Platform, ImageBackground } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
@@ -12,18 +12,12 @@ import { benefitsData } from "../data/benefitsData";
 import { includedItems } from "../data/includedData";
 import { RootStackParamList } from "../navigation/RootNavigator";
 import { useResponsive } from "../hooks/useResponsive";
-import { trackPageView } from "../utils/facebook-pixel";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Home">;
 
 export const HomeScreen = ({ navigation }: Props) => {
   const insets = useSafeAreaInsets();
   const { isDesktop, isTablet } = useResponsive();
-
-  // Track PageView when the screen loads
-  useEffect(() => {
-    trackPageView("Home - Imersão China");
-  }, []);
 
   const handleCTAPress = () => {
     navigation.navigate("Form");

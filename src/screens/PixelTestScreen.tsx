@@ -14,15 +14,14 @@ export function PixelTestScreen() {
 
   useEffect(() => {
     // Verificar se as credenciais estão carregadas
-    const id = "2671738819859416";
-    const token = "EAAUTMl9TE88BQEZBdK336WubrQ9Rk1HyhgPUHCZCoNkGdcNX49OZAXZB94tI4ABCRcmwccxBsLsm2buCuU6QKeyJZBR0gtVkXZAmXRKV6kWeZBqIXR6V5OVtZCEoGFYwMn1hcJeJdomXRLBWF3yuZBEjLjvIc9Tt9s21sPDObU7PjS8NzJkc3TZB21q1M47nYZCN6IElAZDZD";
+    const id = process.env.EXPO_PUBLIC_VIBECODE_META_PIXEL_ID || "NOT SET";
+    const token = process.env.EXPO_PUBLIC_VIBECODE_META_ACCESS_TOKEN || "NOT SET";
 
     setPixelId(id);
     setAccessToken(token.substring(0, 20) + "...");
 
     addStatus(`Pixel ID: ${id}`);
     addStatus(`Access Token: ${token.substring(0, 20)}...`);
-    addStatus("Credentials loaded ✅");
   }, []);
 
   const addStatus = (message: string) => {
