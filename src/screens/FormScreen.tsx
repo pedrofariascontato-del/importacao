@@ -158,16 +158,18 @@ export const FormScreen = ({ navigation }: Props) => {
       const result = await sendLeadEmail(formData);
 
       if (result.success) {
-        // 🎯 EVENTO PRINCIPAL: Track Lead conversion (CRÍTICO para anúncios)
-        await trackLead("Imersão China - Lead Qualificado");
+        // 🎯 EVENTO PRINCIPAL: Track Lead no Meta Pixel via JavaScript (web)
+        if (typeof window !== 'undefined' && (window as any).fbq) {
+          (window as any).fbq('track', 'Lead', {
+            content_name: 'Imersão China - Lead Qualificado',
+            content_category: 'Pre-inscricao',
+            value: investmentLevel,
+            currency: 'BRL'
+          });
+        }
 
-        // Track additional data for better optimization
-        await trackPixelEvent("CompleteRegistration", {
-          content_name: "Pre-inscricao Imersao China",
-          status: "completed",
-          investment_level: investmentLevel,
-          has_cnpj: hasCNPJ
-        });
+        // Track via Conversions API (mobile fallback)
+        await trackLead("Imersão China - Lead Qualificado");
 
         setSubmitStatus({
           type: "success",
