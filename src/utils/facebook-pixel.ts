@@ -3,8 +3,9 @@
  * Tracks events for Facebook Ads conversion tracking and analytics
  */
 
-const PIXEL_ID = process.env.EXPO_PUBLIC_VIBECODE_META_PIXEL_ID || "";
-const ACCESS_TOKEN = process.env.EXPO_PUBLIC_VIBECODE_META_ACCESS_TOKEN || "";
+// Meta Pixel Credentials - Zaveno Trading Imersão China
+const PIXEL_ID = "2671738819859416";
+const ACCESS_TOKEN = "EAAUTMl9TE88BQEZBdK336WubrQ9Rk1HyhgPUHCZCoNkGdcNX49OZAXZB94tI4ABCRcmwccxBsLsm2buCuU6QKeyJZBR0gtVkXZAmXRKV6kWeZBqIXR6V5OVtZCEoGFYwMn1hcJeJdomXRLBWF3yuZBEjLjvIc9Tt9s21sPDObU7PjS8NzJkc3TZB21q1M47nYZCN6IElAZDZD";
 
 interface PixelEventParams {
   [key: string]: string | number | boolean | string[] | number[];
@@ -53,7 +54,7 @@ export async function trackPixelEvent(
     };
 
     const response = await fetch(
-      `https://graph.facebook.com/v18.0/${PIXEL_ID}/events`,
+      `https://graph.facebook.com/v21.0/${PIXEL_ID}/events`,
       {
         method: "POST",
         headers: {

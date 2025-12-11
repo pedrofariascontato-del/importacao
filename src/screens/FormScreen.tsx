@@ -14,6 +14,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigation/RootNavigator";
 import { sendLeadEmail } from "../api/email-service";
+import { trackLead, trackPixelEvent } from "../utils/facebook-pixel";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Form">;
 
@@ -157,6 +158,17 @@ export const FormScreen = ({ navigation }: Props) => {
       const result = await sendLeadEmail(formData);
 
       if (result.success) {
+        // 🎯 EVENTO PRINCIPAL: Track Lead conversion (CRÍTICO para anúncios)
+        await trackLead("Imersão China - Lead Qualificado");
+
+        // Track additional data for better optimization
+        await trackPixelEvent("CompleteRegistration", {
+          content_name: "Pre-inscricao Imersao China",
+          status: "completed",
+          investment_level: investmentLevel,
+          has_cnpj: hasCNPJ
+        });
+
         setSubmitStatus({
           type: "success",
           message:

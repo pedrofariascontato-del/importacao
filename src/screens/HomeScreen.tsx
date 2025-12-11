@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, ScrollView, Pressable, Platform, ImageBackground } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
@@ -12,6 +12,7 @@ import { benefitsData } from "../data/benefitsData";
 import { includedItems } from "../data/includedData";
 import { RootStackParamList } from "../navigation/RootNavigator";
 import { useResponsive } from "../hooks/useResponsive";
+import { trackPageView, trackPixelEvent } from "../utils/facebook-pixel";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Home">;
 
@@ -19,7 +20,17 @@ export const HomeScreen = ({ navigation }: Props) => {
   const insets = useSafeAreaInsets();
   const { isDesktop, isTablet } = useResponsive();
 
+  // Track PageView when user lands on the page
+  useEffect(() => {
+    trackPageView("Landing Page - Imersão China");
+  }, []);
+
   const handleCTAPress = () => {
+    // Track CTA click as ViewContent event
+    trackPixelEvent("ViewContent", {
+      content_name: "CTA Click - Pre-inscricao",
+      content_category: "Button Click"
+    });
     navigation.navigate("Form");
   };
 
